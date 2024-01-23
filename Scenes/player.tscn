@@ -34,3 +34,5 @@ player = NodePath("../..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="Bonk" type="AudioStreamPlayer2D" parent="."]

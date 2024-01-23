@@ -10,6 +10,9 @@ const START_POSITION := Vector2(300, 200)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	# Por em um local global posteriormente
+	randomize()
 	instantiatePlayer(START_POSITION)
 	#instantiateEnemy(START_POSITION + Vector2(10, 10))
 	
