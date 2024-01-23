@@ -34,6 +34,7 @@ func bonk():
 	# É somado com um vetor pra dar um offset do player
 	var position = player.global_position + Vector2(0 , randf_range(-4, -7))
 	DialogManager.spawnFloatingText("BONK", Color.DARK_RED, position)
+	player.spawnBonkArea() 
 
 func resetSpritePosition():
 	sprite.rotation_degrees = lerp(sprite.rotation_degrees, 0.0, 0.1)
@@ -41,5 +42,3 @@ func resetSpritePosition():
 func changeTexture():
 	if sprite.texture.resource_name != "special_attack":
 			sprite.texture = bonk_attack_texture
-	
-		

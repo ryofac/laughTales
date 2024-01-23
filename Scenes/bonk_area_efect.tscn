@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://23ws4v15t5ip"]
+
+[ext_resource type="Script" path="res://Scripts/Singletons/bonk_area_efect.gd" id="1_kqs26"]
+[ext_resource type="Texture2D" uid="uid://bhx3esgnx3hor" path="res://Assets/Image/other/areaAtaque(triplicado)).png" id="1_vaxj0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fsm5x"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(0, 0, 124, 124)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycx4w"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(124, 0, 124, 124)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe7h5"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(248, 0, 124, 124)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aprsk"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(372, 0, 124, 124)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5tul"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(496, 0, 124, 124)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqb0w"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(620, 0, 124, 124)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyoma"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(744, 0, 124, 124)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_leomk"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(868, 0, 124, 124)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbfc6"]
+atlas = ExtResource("1_vaxj0")
+region = Rect2(992, 0, 124, 124)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8f2sl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fsm5x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycx4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe7h5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aprsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5tul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqb0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyoma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_leomk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbfc6")
+}],
+"loop": false,
+"name": &"bonk",
+"speed": 15.0
+}]
+
+[node name="bonkAreaEfect" type="Node2D"]
+script = ExtResource("1_kqs26")
+
+[node name="areaSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_8f2sl")
+animation = &"bonk"
+
+[connection signal="animation_finished" from="areaSprite" to="." method="_on_area_sprite_animation_finished"]

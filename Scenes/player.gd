@@ -4,6 +4,13 @@ class_name Player
 #var enemy: Enemy
 
 @onready var activeSprite = $ActiveSprite 
+var bonk_area_efect = preload("res://Scenes/bonk_area_efect.tscn")
+var bonk_stream = [
+	preload("res://Assets/Audio/clown-horn_2.mp3"),
+	preload("res://Assets/Audio/clown-horn.mp3")
+]
+
+@onready var audio_player = $Bonk as AudioStreamPlayer2D;
 
 var canMove = true
 
@@ -27,6 +34,23 @@ func talk():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_home"):
 		talk()
+		
+		
+func spawnBonkArea():
+	var _b = bonk_area_efect.instantiate();
+	add_child(_b);
+	_b.global_position = global_position;
+	
+	play_audio();
+	
+func play_audio():
+	# define qual som
+	#TODO: Adicionar mais sons?
+	audio_player.stream = bonk_stream.pick_random();
+	
+	# variação para o som
+	audio_player.pitch_scale = randf_range(0.9, 1.1);
+	audio_player.play()
 #func tell_jokes(enemy):
 	#if enemy and enemy is Enemy:
 		#enemy.life_points -= 10
