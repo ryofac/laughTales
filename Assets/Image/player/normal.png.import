@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd86g42yga2gh"
-path="res://.godot/imported/speech_box.png-cd33329b6fdfebed335328b81cb83557.ctex"
+uid="uid://c4vgsr8uv7vdc"
+path="res://.godot/imported/normal.png-31e557f93eceb13c8e69fe187a249a8d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Image/speech_box.png"
-dest_files=["res://.godot/imported/speech_box.png-cd33329b6fdfebed335328b81cb83557.ctex"]
+source_file="res://Assets/Image/player/normal.png"
+dest_files=["res://.godot/imported/normal.png-31e557f93eceb13c8e69fe187a249a8d.ctex"]
 
 [params]
 

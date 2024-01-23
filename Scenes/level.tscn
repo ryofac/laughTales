@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bt08hmj05nocl"]
+[gd_scene load_steps=5 format=3 uid="uid://bt08hmj05nocl"]
 
 [ext_resource type="Texture2D" uid="uid://b8i5nfwel8yg6" path="res://Assets/Image/Tiny Town/Tilemap/tilemap_packed.png" id="1_3fjc7"]
+[ext_resource type="Script" path="res://Scripts/level.gd" id="1_s340o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_igss1"]
 resource_name = "BaseTiles"
@@ -592,6 +593,7 @@ terrain_set_1/terrain_0/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_igss1")
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_s340o")
 metadata/_edit_vertical_guides_ = [304.0, 640.0]
 metadata/_edit_horizontal_guides_ = [192.0, 370.0]
 
