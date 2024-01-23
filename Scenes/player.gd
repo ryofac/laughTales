@@ -6,7 +6,6 @@ class_name Player
 @onready var activeSprite = $ActiveSprite 
 var bonk_area_efect = preload("res://Scenes/bonk_area_efect.tscn")
 var bonk_stream = [
-	preload("res://Assets/Audio/clown-horn_2.mp3"),
 	preload("res://Assets/Audio/clown-horn.mp3")
 ]
 
@@ -28,7 +27,7 @@ func _process(delta):
 # de um estado separado
 
 func talk():
-	var text: Array[String] = ["12345678", "UM", "TESTE!!!!"]
+	var text: Array[String] = ["Abobra com mel"]
 	DialogManager.startDialogue(global_position, text)
 
 func _unhandled_input(event):
@@ -47,7 +46,6 @@ func play_audio():
 	# define qual som
 	#TODO: Adicionar mais sons?
 	audio_player.stream = bonk_stream.pick_random();
-	
 	# variação para o som
 	audio_player.pitch_scale = randf_range(0.9, 1.1);
 	audio_player.play()

@@ -28,6 +28,13 @@ window/size/window_width_override=1080
 window/size/window_height_override=720
 window/stretch/mode="viewport"
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="World"
+2d_physics/layer_3="Itens"
+2d_physics/layer_4="Enemy"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
