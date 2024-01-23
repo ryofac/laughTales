@@ -52,6 +52,7 @@ func showText(textToDisplay):
 	_display_letter()
 
 func _display_letter():
+	$LetterDisplayTimer.stop();
 	label.text += text[letter_index]
 	letter_index += 1
 	if letter_index >= text.length():
