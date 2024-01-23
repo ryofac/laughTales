@@ -18,14 +18,13 @@ func enter():
 func update(delta):
 	sprite = player.anim_sprite
 	#setWalkingSprite()
-	if player.direction:
-		sprite.play("walk");
 	
 	dir = player.direction
 	rotation_angle += 1
 	if rotation_angle > 360: rotation_angle = 0
 	if !player.velocity.is_zero_approx():
 		animate_walk()
+		sprite.play("walk");
 	else:
 		rotation_angle = 0
 		#if sprite:

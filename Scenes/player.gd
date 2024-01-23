@@ -19,14 +19,16 @@ var bonk_stream = [
 var canMove = true
 
 func _ready():
-	pass
+	anim_sprite.play("idle");
+
 
 func _process(delta):
 	direction.x = Input.get_axis("ui_left", "ui_right");
 	direction.y = Input.get_axis("ui_up", "ui_down");
 	direction = direction.normalized();
 	
-	if !direction:
+	# Toca idle apenas se tiver parado e não estiver atacando
+	if !direction and canMove:
 		anim_sprite.play("idle");
 		anim_sprite.rotation_degrees = lerp(anim_sprite.rotation_degrees, 0.0, 0.1);
 	

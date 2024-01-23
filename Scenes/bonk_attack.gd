@@ -22,8 +22,10 @@ func update(delta):
 		attackTime -= delta;
 	else:
 		Transitioned.emit(self, "walking")
+		
+	#Ativa a animação uma vez só
 	if sprite.animation != "bonk":
-			sprite.play("bonk")
+		sprite.play("bonk");
 
 func physics_update(delta):
 	pass

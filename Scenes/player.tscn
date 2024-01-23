@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://caye0v83rm6ni"]
+[gd_scene load_steps=20 format=3 uid="uid://caye0v83rm6ni"]
 
 [ext_resource type="Texture2D" uid="uid://c4vgsr8uv7vdc" path="res://Assets/Image/player/normal.png" id="1_hr50d"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_whlpr"]
@@ -7,6 +7,22 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_px7sx"]
 [ext_resource type="Script" path="res://Scenes/walkingStatePlayer.gd" id="4_f4hrv"]
 [ext_resource type="Script" path="res://Scenes/bonk_attack.gd" id="5_tcloc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiiwv"]
+atlas = ExtResource("2_shyjq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pv5f4"]
+atlas = ExtResource("2_shyjq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paiqp"]
+atlas = ExtResource("2_shyjq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn6h5"]
+atlas = ExtResource("2_shyjq")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4q7b"]
 atlas = ExtResource("2_b52rk")
@@ -36,11 +52,23 @@ region = Rect2(80, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_shyjq")
+"texture": SubResource("AtlasTexture_kiiwv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pv5f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paiqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fn6h5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiiwv")
 }],
-"loop": true,
+"loop": false,
 "name": &"bonk",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -86,7 +114,9 @@ speed = 50.0
 [node name="animSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_tw2wd")
-animation = &"idle"
+animation = &"bonk"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
