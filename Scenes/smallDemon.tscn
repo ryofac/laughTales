@@ -1,0 +1,109 @@
+[gd_scene load_steps=17 format=3 uid="uid://cmsa1n8mgd8n1"]
+
+[ext_resource type="PackedScene" uid="uid://dm6itx56ensml" path="res://Scenes/enemy.tscn" id="1_cvju7"]
+[ext_resource type="Texture2D" uid="uid://h3bsyhfrxior" path="res://Assets/Image/enemy/smallDemon/idle.png" id="2_mrlam"]
+[ext_resource type="Texture2D" uid="uid://fv26nawi5mto" path="res://Assets/Image/enemy/smallDemon/run.png" id="3_lbgg5"]
+[ext_resource type="Script" path="res://Scenes/idle.gd" id="4_j1d7r"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="4_vgxk8"]
+[ext_resource type="Script" path="res://Scripts/enemyWander.gd" id="5_lwt3j"]
+[ext_resource type="Script" path="res://Scripts/enemyFollowing.gd" id="6_xbgso"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y21bn"]
+atlas = ExtResource("2_mrlam")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sy8ll"]
+atlas = ExtResource("2_mrlam")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hovnm"]
+atlas = ExtResource("2_mrlam")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv1yt"]
+atlas = ExtResource("2_mrlam")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5vbw"]
+atlas = ExtResource("3_lbgg5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjjg0"]
+atlas = ExtResource("3_lbgg5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jjw0"]
+atlas = ExtResource("3_lbgg5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuepi"]
+atlas = ExtResource("3_lbgg5")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v6ccg"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y21bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sy8ll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hovnm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv1yt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5vbw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjjg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jjw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cuepi")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="Enemy" instance=ExtResource("1_cvju7")]
+speed = 40.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_v6ccg")
+animation = &"idle"
+frame_progress = 0.57992
+
+[node name="StateMachine" parent="." index="2" node_paths=PackedStringArray("initialState")]
+script = ExtResource("4_vgxk8")
+initialState = NodePath("idle")
+
+[node name="idle" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("4_j1d7r")
+enemy = NodePath("../..")
+
+[node name="following" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_xbgso")
+seeAmount = 50
+enemy = NodePath("../..")
+
+[node name="wandering" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_lwt3j")
+enemy = NodePath("../..")

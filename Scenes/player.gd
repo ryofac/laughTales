@@ -11,8 +11,6 @@ var bonk_stream = [
 
 @onready var audio_player = $Bonk as AudioStreamPlayer2D;
 
-var canMove = true
-
 func _ready():
 	pass
 
