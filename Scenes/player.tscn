@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://caye0v83rm6ni"]
+
+[ext_resource type="Texture2D" uid="uid://c4vgsr8uv7vdc" path="res://Assets/Image/player/normal.png" id="1_hr50d"]
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_whlpr"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_px7sx"]
+[ext_resource type="Script" path="res://Scenes/walkingStatePlayer.gd" id="4_f4hrv"]
+[ext_resource type="Script" path="res://Scenes/bonk_attack.gd" id="5_tcloc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r40n8"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_whlpr")
+speed = 50.0
+
+[node name="ActiveSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_hr50d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_r40n8")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("3_px7sx")
+initialState = NodePath("walking")
+
+[node name="walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("4_f4hrv")
+player = NodePath("../..")
+
+[node name="bonk_attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("5_tcloc")
+player = NodePath("../..")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
