@@ -40,7 +40,9 @@ func animate_walk():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
 		Transitioned.emit(self, "bonk_attack");
-
+	elif event.is_action_pressed("throw_attack"):
+		if player.target:
+			Transitioned.emit(self, "throwing");
 #func setWalkingSprite():
 	#if sprite.texture.resource_name != "normal":
 		#sprite.texture = walkingTexture

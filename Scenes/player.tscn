@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://caye0v83rm6ni"]
+[gd_scene load_steps=22 format=3 uid="uid://caye0v83rm6ni"]
 
 [ext_resource type="Texture2D" uid="uid://c4vgsr8uv7vdc" path="res://Assets/Image/player/normal.png" id="1_hr50d"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_whlpr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_px7sx"]
 [ext_resource type="Script" path="res://Scenes/walkingStatePlayer.gd" id="4_f4hrv"]
 [ext_resource type="Script" path="res://Scenes/bonk_attack.gd" id="5_tcloc"]
+[ext_resource type="Script" path="res://Scenes/throwingState.gd" id="8_5gduc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kiiwv"]
 atlas = ExtResource("2_shyjq")
@@ -105,6 +106,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r40n8"]
 size = Vector2(16, 16)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ttsna"]
+radius = 64.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 14
@@ -119,8 +123,13 @@ frame = 4
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_r40n8")
+
+[node name="rangeArea" type="Area2D" parent="."]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rangeArea"]
+shape = SubResource("CircleShape2D_ttsna")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("3_px7sx")
@@ -134,7 +143,13 @@ player = NodePath("../..")
 script = ExtResource("5_tcloc")
 player = NodePath("../..")
 
+[node name="throwing" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("8_5gduc")
+player = NodePath("../..")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
 [node name="Bonk" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="body_exited" from="rangeArea" to="." method="_on_range_area_body_exited"]

@@ -17,7 +17,7 @@ var bonk_stream = [
 	preload("res://Assets/Audio/squeaky-toy.mp3")
 ]
 
-var canMove = true
+var target: Enemy;
 
 func _ready():
 	anim_sprite.play("idle");
@@ -32,6 +32,8 @@ func _process(delta):
 	if !direction and canMove:
 		anim_sprite.play("idle");
 		anim_sprite.rotation_degrees = lerp(anim_sprite.rotation_degrees, 0.0, 0.1);
+	
+	update_target();
 	
 	velocity = speed * direction * int(canMove)
 	move_and_slide()
@@ -55,6 +57,36 @@ func spawnBonkArea():
 	
 	play_audio();
 	
+# preciso que o target seja atualizado sempre, independente do estado atual;
+func update_target():
+	var range_area = $rangeArea as Area2D;
+	
+	# pega todos os corpos em contato e filtra apenas os inimigos
+	if range_area.has_overlapping_bodies():
+		var _enemies = range_area.get_overlapping_bodies().filter(func(x): return x is Enemy) as Array[Enemy];
+		
+		#só inicializa as variaveis
+		var _newEnemy: Enemy = _enemies[0];
+		var _shortest := global_position.distance_to(_newEnemy.global_position);
+		
+		for enemy in _enemies:
+			var _diff = global_position.distance_to(enemy.global_position);
+			
+			if  _diff < _shortest:
+				_newEnemy = enemy;
+				_shortest = _diff;
+		
+		target = _newEnemy;
+		
+	# se não tem ninguem ent é null
+	else:
+		target = null;
+
+
+func _on_range_area_body_exited(body):
+	if body is Enemy:
+		body.on_target = false;
+		
 func play_audio():
 	# define qual som
 	#TODO: Adicionar mais sons?
@@ -81,3 +113,5 @@ func play_audio():
 #func _on_area_2d_body_exited(body):
 	#if body == enemy:
 		#enemy = null
+
+
