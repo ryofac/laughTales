@@ -3,21 +3,36 @@ class_name Player
 	
 #var enemy: Enemy
 
-@onready var activeSprite = $ActiveSprite 
+@onready var audio_player = $Bonk as AudioStreamPlayer2D;
+@onready var anim_sprite = $animSprite as AnimatedSprite2D;
+
 var bonk_area_efect = preload("res://Scenes/bonk_area_efect.tscn")
 var bonk_stream = [
-	preload("res://Assets/Audio/clown-horn.mp3")
+	preload("res://Assets/Audio/clown-horn.mp3"),
+	preload("res://Assets/Audio/clown-horn_1.mp3"),
+	preload("res://Assets/Audio/clown-horn_2.mp3"),
+	preload("res://Assets/Audio/bicycle-horn.mp3"),
+	preload("res://Assets/Audio/bicycle-horn_1.mp3"),
+	preload("res://Assets/Audio/baby-squeak-toy.mp3"),
+	preload("res://Assets/Audio/squeaky-toy.mp3")
 ]
 
-@onready var audio_player = $Bonk as AudioStreamPlayer2D;
+var canMove = true
 
 func _ready():
-	pass
+	anim_sprite.play("idle");
+
 
 func _process(delta):
 	direction.x = Input.get_axis("ui_left", "ui_right");
 	direction.y = Input.get_axis("ui_up", "ui_down");
 	direction = direction.normalized();
+	
+	# Toca idle apenas se tiver parado e não estiver atacando
+	if !direction and canMove:
+		anim_sprite.play("idle");
+		anim_sprite.rotation_degrees = lerp(anim_sprite.rotation_degrees, 0.0, 0.1);
+	
 	velocity = speed * direction * int(canMove)
 	move_and_slide()
 

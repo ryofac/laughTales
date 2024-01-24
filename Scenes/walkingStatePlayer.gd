@@ -5,9 +5,9 @@ class_name walkingPlayerS
 @export var ANIMATION_SPEED = 5.0
 @export var player: Player;
 
-@onready var walkingTexture = preload("res://Assets/Image/player/normal.png")
+#@onready var walkingTexture = preload("res://Assets/Image/player/normal.png")
 
-var sprite: Sprite2D;
+var sprite: AnimatedSprite2D;
 
 var dir;
 var rotation_angle: float
@@ -16,17 +16,20 @@ func enter():
 	player.canMove = true
 
 func update(delta):
-	sprite = player.activeSprite 
-	setWalkingSprite()
+	sprite = player.anim_sprite
+	#setWalkingSprite()
+	
 	dir = player.direction
 	rotation_angle += 1
 	if rotation_angle > 360: rotation_angle = 0
 	if !player.velocity.is_zero_approx():
 		animate_walk()
+		sprite.play("walk");
 	else:
 		rotation_angle = 0
-		if sprite:
-			sprite.rotation_degrees = lerp(sprite.rotation_degrees, 0.0, 0.1)
+		#if sprite:
+			#Transitioned.emit(self, "idle");
+			
 
 func animate_walk():
 	var sin_angle = sin(deg_to_rad(rotation_angle) * ANIMATION_SPEED) * 10
@@ -38,9 +41,9 @@ func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
 		Transitioned.emit(self, "bonk_attack");
 
-func setWalkingSprite():
-	if sprite.texture.resource_name != "normal":
-		sprite.texture = walkingTexture
+#func setWalkingSprite():
+	#if sprite.texture.resource_name != "normal":
+		#sprite.texture = walkingTexture
 		
 func physics_update(delta):
 	pass

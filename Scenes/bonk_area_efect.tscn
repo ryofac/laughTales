@@ -75,6 +75,7 @@ animations = [{
 }]
 
 [node name="bonkAreaEfect" type="Node2D"]
+show_behind_parent = true
 script = ExtResource("1_kqs26")
 
 [node name="areaSprite" type="AnimatedSprite2D" parent="."]
