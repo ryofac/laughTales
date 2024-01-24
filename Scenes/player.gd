@@ -16,6 +16,7 @@ var bonk_stream = [
 	preload("res://Assets/Audio/baby-squeak-toy.mp3"),
 	preload("res://Assets/Audio/squeaky-toy.mp3")
 ]
+
 var canMove = true
 
 func _ready():
