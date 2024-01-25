@@ -37,5 +37,4 @@ func crosshair_animation():
 		sin(deg_to_rad(counter * crosshSpeed)) * animationRange,
 		cos(deg_to_rad(counter * crosshSpeed)) * animationRange
 	)
-	
 	$Crosshair.position = _newPosition;
