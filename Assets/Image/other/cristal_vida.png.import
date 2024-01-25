@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw07tv6filv6y"
-path="res://.godot/imported/ball_2x2.png-6f8d4d4916d583636440729f552d08b4.ctex"
+uid="uid://dfgqhm37q6cbc"
+path="res://.godot/imported/cristal_vida.png-43ed7ac0c6cf717249f4abf3a689d474.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Image/other/ball_2x2.png"
-dest_files=["res://.godot/imported/ball_2x2.png-6f8d4d4916d583636440729f552d08b4.ctex"]
+source_file="res://Assets/Image/other/cristal_vida.png"
+dest_files=["res://.godot/imported/cristal_vida.png-43ed7ac0c6cf717249f4abf3a689d474.ctex"]
 
 [params]
 

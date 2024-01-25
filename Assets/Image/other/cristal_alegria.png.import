@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b415fnjpg0yg"
-path="res://.godot/imported/ball_2x2_luz_sombra.png-14d15725d6a2c5a3a1e0affcf128a910.ctex"
+uid="uid://pt7knwasn1up"
+path="res://.godot/imported/cristal_alegria.png-0823db3a1bd6a178f37bb0c3cbe45d5e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Image/other/ball_2x2_luz_sombra.png"
-dest_files=["res://.godot/imported/ball_2x2_luz_sombra.png-14d15725d6a2c5a3a1e0affcf128a910.ctex"]
+source_file="res://Assets/Image/other/cristal_alegria.png"
+dest_files=["res://.godot/imported/cristal_alegria.png-0823db3a1bd6a178f37bb0c3cbe45d5e.ctex"]
 
 [params]
 
