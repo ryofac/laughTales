@@ -17,7 +17,9 @@ var bonk_stream = [
 	preload("res://Assets/Audio/squeaky-toy.mp3")
 ]
 
+var enemiesInRange = [];
 var target: Enemy;
+var targetIndex = 0;
 
 func _ready():
 	anim_sprite.play("idle");
@@ -33,7 +35,11 @@ func _process(delta):
 		anim_sprite.play("idle");
 		anim_sprite.rotation_degrees = lerp(anim_sprite.rotation_degrees, 0.0, 0.1);
 	
-	update_target();
+	getEnemies();
+	defineTarget();
+	
+	if Input.is_action_just_pressed("throw_attack"):
+		print(enemiesInRange);
 	
 	velocity = speed * direction * int(canMove)
 	move_and_slide()
@@ -58,34 +64,36 @@ func spawnBonkArea():
 	play_audio();
 	
 # preciso que o target seja atualizado sempre, independente do estado atual;
-func update_target():
+func getEnemies():
 	var range_area = $rangeArea as Area2D;
-	
 	# pega todos os corpos em contato e filtra apenas os inimigos
 	if range_area.has_overlapping_bodies():
-		var _enemies = range_area.get_overlapping_bodies().filter(func(x): return x is Enemy) as Array[Enemy];
-		
-		#só inicializa as variaveis
-		var _newEnemy: Enemy = _enemies[0];
-		var _shortest := global_position.distance_to(_newEnemy.global_position);
-		
-		for enemy in _enemies:
-			var _diff = global_position.distance_to(enemy.global_position);
-			
-			if  _diff < _shortest:
-				_newEnemy = enemy;
-				_shortest = _diff;
-		
-		target = _newEnemy;
-		
-	# se não tem ninguem ent é null
+		enemiesInRange = range_area.get_overlapping_bodies().filter(func(x): return x is Enemy) as Array[Enemy];
+		enemiesInRange.sort_custom(func(a, b): return self.global_position.distance_to(a.global_position) < self.global_position.distance_to(b.global_position))
 	else:
+		enemiesInRange = []
+
+func defineTarget():
+	if enemiesInRange.is_empty():
 		target = null;
+		return;
 
-
+	if !target or target not in enemiesInRange:
+		targetIndex = 0;
+		target = enemiesInRange[targetIndex];
+		return
+	
+	if Input.is_action_just_pressed("change_target"):
+		print("Mudando target : index agora é %d" % targetIndex)
+		print(enemiesInRange)
+		targetIndex += 1
+		targetIndex = targetIndex % enemiesInRange.size()
+		target = enemiesInRange[targetIndex];
+	
 func _on_range_area_body_exited(body):
 	if body is Enemy:
 		body.on_target = false;
+	
 		
 func play_audio():
 	# define qual som
@@ -94,24 +102,3 @@ func play_audio():
 	# variação para o som
 	audio_player.pitch_scale = randf_range(0.9, 1.1);
 	audio_player.play()
-#func tell_jokes(enemy):
-	#if enemy and enemy is Enemy:
-		#enemy.life_points -= 10
-		#spawnLaughts(enemy.global_position)
-
-#func spawnLaughts(pos):
-	#var instance = laughtsScene.instantiate()
-	#instance.global_position = pos
-	#get_parent().add_child(instance)
-
-#
-#func _on_area_2d_body_entered(body):
-	#if body is Enemy:
-		#enemy = body
-
-#
-#func _on_area_2d_body_exited(body):
-	#if body == enemy:
-		#enemy = null
-
-

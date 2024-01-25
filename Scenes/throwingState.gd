@@ -8,19 +8,27 @@ class_name throwAttackS
 var attackTime;
 
 var ballScene = preload("res://Scenes/ball.tscn")
+var throwDirection;
+var spritePlayer
 
 func enter():
+	spritePlayer = player.anim_sprite
+	player.canMove = true;
 	attackTime = duraction;
+	throwDirection = player.global_position.direction_to(player.target.global_position);
 	throw_ball();
 	
 func update(delta):
-	
+	spritePlayer.rotation_degrees = lerp(spritePlayer.rotation_degrees, 0.0, 0.1);
 	if attackTime > 0:
 		attackTime -= delta;
 	else:
 		Transitioned.emit(self, "walking")
-	
-	# animação de arremesso
+		
+func animateSprite():
+	player.anim_sprite.play("walk")
+	player.anim_sprite.flip_h = throwDirection.x < 0
+	spritePlayer.rotation_degrees = 45 * throwDirection.x
 	
 func physics_update(delta):
 	pass
@@ -29,4 +37,6 @@ func throw_ball():
 	var _b = ballScene.instantiate();
 	player.get_parent().add_child(_b);
 	_b.global_position = player.global_position
-	_b.dir = player.global_position.direction_to(player.target.global_position);
+	_b.dir = throwDirection;
+	animateSprite();
+	

@@ -10,7 +10,7 @@ var on_target: bool = false;
 
 # Animação da mira
 var counter = 0;
-@export var crosshSpeed = 1;
+@export var crosshSpeed = 3
 @export var animationRange = 3;
 ##
 
@@ -19,17 +19,13 @@ func _physics_process(delta):
 	move_and_slide();
 	
 func _process(delta):
-	
 	counter += 1
 	if counter > 360: counter = 0
-	
 	crosshair_animation();
-	
 	manageSprite();
 	
 func manageSprite():
 	$Crosshair.visible = player.target == self;
-	
 	if !velocity.is_zero_approx():
 		sprite.play("run")
 		sprite.flip_h = direction.x < 0
@@ -41,5 +37,4 @@ func crosshair_animation():
 		sin(deg_to_rad(counter * crosshSpeed)) * animationRange,
 		cos(deg_to_rad(counter * crosshSpeed)) * animationRange
 	)
-	
 	$Crosshair.position = _newPosition;
