@@ -34,6 +34,7 @@ texture = ExtResource("2_si8pn")
 [node name="Navigation" type="Node2D" parent="."]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+navigation_layers = 3
 
 [node name="RecalcPathTimer" type="Timer" parent="Navigation"]
 wait_time = 0.5

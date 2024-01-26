@@ -20,6 +20,9 @@ var bonk_stream = [
 var enemiesInRange = [];
 var target: Enemy;
 var targetIndex = 0;
+@export var BONK_DAMAGE_AMOUNT: float;
+@export var NORMAL_ATTACK_AMOUNT: float;
+@export var THROWING_ATTACK_AMOUNT: float;
 
 func _ready():
 	anim_sprite.play("idle");
