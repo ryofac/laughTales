@@ -12,12 +12,11 @@ func enter():
 	timer = timeToStop;
 	
 func update(delta):
-	
-	knockback_dir = (enemy.global_position - player.global_position).normalized();
-	
 	if enemy.is_dying:
 		Transitioned.emit(self, "idle");
+		return;
 	
+	knockback_dir = (enemy.global_position - player.global_position).normalized();
 	if enemy.sprite.animation != "hit": 
 		enemy.sprite.play("hit")
 	

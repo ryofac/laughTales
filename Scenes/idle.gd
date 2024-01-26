@@ -3,8 +3,11 @@ class_name enemyIdleS
 
 var idleTime: float;
 
-func enter():
+func _ready():
 	enemy.being_attacked.connect(_on_enemy_being_attacked);
+	
+
+func enter():
 	enemy.velocity = Vector2.ZERO;
 	idleTime = 2
 	
@@ -14,6 +17,7 @@ func update(delta):
 	
 	if enemy.is_dying:
 		enemy.sprite.stop();
+		return;
 	
 	if distance.length() < 50 and distance.normalized().dot(enemy.direction) > 0:
 		Transitioned.emit(self, "following");
@@ -23,4 +27,4 @@ func update(delta):
 		Transitioned.emit(self, "wandering")
 
 func _on_enemy_being_attacked():
-	Transitioned.emit(self, "attacked");
+	if !enemy.is_dying: Transitioned.emit(self, "attacked");

@@ -35,14 +35,13 @@ func _physics_process(delta):
 
 # Função conectada aos sinais transitioned's, encarregada de mudar estados
 func _on_transitioned_state(state: State, newStateName: String):
-	print("%s trocando de estado [%s] - [%s]" % [get_parent().name, state.name, newStateName])
-	
+	#print("%s trocando de estado [%s] - [%s]" % [get_parent().name, state.name, newStateName])
 	if state != currentState:
 		return
 		
 	var newState = states.get(newStateName.to_lower())
 	
-	if !newState:
+	if !newState or newState == currentState:
 		return
 		
 	newState.enter();

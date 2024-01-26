@@ -4,7 +4,8 @@ class_name Player
 #var enemy: Enemy
 
 @onready var audio_player = $Bonk as AudioStreamPlayer2D;
-@onready var anim_sprite = $animSprite as AnimatedSprite2D;
+@onready var sprite = $animSprite as AnimatedSprite2D;
+var attackingEnemy = null;
 
 var bonk_area_efect = preload("res://Scenes/bonk_area_efect.tscn")
 var bonk_stream = [
@@ -25,7 +26,11 @@ var targetIndex = 0;
 @export var THROWING_ATTACK_AMOUNT: float;
 
 func _ready():
-	anim_sprite.play("idle");
+	sprite.play("idle");
+	# Isso está presente na entidade para o controle das frases que ele fala quando
+	#toma dano
+	damagePhrases = ["Its not a joke!", "This is not fun!", "That hurt! :/"]
+	colorDamage = Color.RED
 
 
 func _process(delta):
@@ -35,9 +40,9 @@ func _process(delta):
 	
 	# Toca idle apenas se tiver parado e não estiver atacando
 	if !direction and canMove:
-		anim_sprite.play("idle");
-		anim_sprite.rotation_degrees = lerp(anim_sprite.rotation_degrees, 0.0, 0.1);
-	
+		if sprite.animation != "hit": sprite.play("idle");
+		sprite.rotation_degrees = lerp(sprite.rotation_degrees, 0.0, 0.1);
+		
 	getEnemies();
 	defineTarget();
 	velocity = speed * direction * int(canMove)
@@ -59,7 +64,6 @@ func spawnBonkArea():
 	var _b = bonk_area_efect.instantiate();
 	add_child(_b);
 	_b.global_position = global_position;
-	
 	play_audio();
 	
 # preciso que o target seja atualizado sempre, independente do estado atual;

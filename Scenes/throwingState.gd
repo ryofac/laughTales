@@ -12,7 +12,7 @@ var throwDirection;
 var spritePlayer
 
 func enter():
-	spritePlayer = player.anim_sprite
+	spritePlayer = player.sprite
 	player.canMove = true;
 	attackTime = duraction;
 	throwDirection = player.global_position.direction_to(player.target.global_position);
@@ -26,8 +26,8 @@ func update(delta):
 		Transitioned.emit(self, "walking")
 		
 func animateSprite():
-	player.anim_sprite.play("walk")
-	player.anim_sprite.flip_h = throwDirection.x < 0
+	player.sprite.play("walk")
+	player.sprite.flip_h = throwDirection.x < 0
 	spritePlayer.rotation_degrees = 45 * throwDirection.x
 	
 func physics_update(delta):

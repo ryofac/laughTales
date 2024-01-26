@@ -6,8 +6,10 @@ var timeToStop = randf_range(1, 2)
 
 var sprite;
 
-func enter():
+func _ready():
 	enemy.being_attacked.connect(_on_enemy_being_attacked);
+
+func enter():
 	enemy.canMove = true
 	timeToStop = randf_range(1, 2)
 	randomize_movement()
