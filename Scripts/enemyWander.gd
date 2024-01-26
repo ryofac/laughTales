@@ -7,6 +7,7 @@ var timeToStop = randf_range(1, 2)
 var sprite;
 
 func enter():
+	enemy.being_attacked.connect(_on_enemy_being_attacked);
 	enemy.canMove = true
 	timeToStop = randf_range(1, 2)
 	randomize_movement()
@@ -18,6 +19,9 @@ func randomize_movement():
 func update(delta):
 	sprite = enemy.sprite;
 	var distance = player.global_position - enemy.global_position
+	
+	if enemy.is_dying:
+		Transitioned.emit(self, "idle");
 	
 	if distance.length() < 50  and distance.normalized().dot(enemy.direction) > 0:
 		Transitioned.emit(self, "following");
@@ -31,3 +35,5 @@ func physics_update(delta):
 	pass
 
 
+func _on_enemy_being_attacked():
+	Transitioned.emit(self, "attacked");

@@ -1,12 +1,25 @@
-[gd_scene load_steps=17 format=3 uid="uid://cmsa1n8mgd8n1"]
+[gd_scene load_steps=24 format=3 uid="uid://cmsa1n8mgd8n1"]
 
 [ext_resource type="PackedScene" uid="uid://dm6itx56ensml" path="res://Scenes/enemy.tscn" id="1_cvju7"]
+[ext_resource type="Texture2D" uid="uid://c153x06h30dk8" path="res://Assets/Image/enemy/smallDemon/hit.png" id="2_bci6p"]
 [ext_resource type="Texture2D" uid="uid://h3bsyhfrxior" path="res://Assets/Image/enemy/smallDemon/idle.png" id="2_mrlam"]
 [ext_resource type="Texture2D" uid="uid://fv26nawi5mto" path="res://Assets/Image/enemy/smallDemon/run.png" id="3_lbgg5"]
 [ext_resource type="Script" path="res://Scenes/idle.gd" id="4_j1d7r"]
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="4_vgxk8"]
 [ext_resource type="Script" path="res://Scripts/enemyWander.gd" id="5_lwt3j"]
 [ext_resource type="Script" path="res://Scripts/enemyFollowing.gd" id="6_xbgso"]
+[ext_resource type="Script" path="res://Scenes/enemyAttacked.gd" id="8_ric7r"]
+[ext_resource type="Texture2D" uid="uid://cjq7lsolpfbr7" path="res://Assets/Image/gui/UI-pack-kenney/PNG/barBack_horizontalMid.png" id="10_ag3uy"]
+[ext_resource type="Texture2D" uid="uid://chx36yghti2g" path="res://Assets/Image/gui/UI-pack-kenney/PNG/edge.png" id="11_7woi5"]
+[ext_resource type="Texture2D" uid="uid://rurricfbmdj5" path="res://Assets/Image/gui/UI-pack-kenney/PNG/barGreen_horizontalMid.png" id="11_glm15"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuj58"]
+atlas = ExtResource("2_bci6p")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dqls"]
+atlas = ExtResource("2_bci6p")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y21bn"]
 atlas = ExtResource("2_mrlam")
@@ -45,6 +58,17 @@ animations = [{
 "frames": [],
 "loop": true,
 "name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuj58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dqls")
+}],
+"loop": false,
+"name": &"hit",
 "speed": 5.0
 }, {
 "frames": [{
@@ -88,8 +112,9 @@ speed = 40.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v6ccg")
-animation = &"idle"
-frame_progress = 0.57992
+animation = &"hit"
+frame = 1
+frame_progress = 1.0
 
 [node name="StateMachine" parent="." index="2" node_paths=PackedStringArray("initialState")]
 script = ExtResource("4_vgxk8")
@@ -107,3 +132,25 @@ enemy = NodePath("../..")
 [node name="wandering" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
 script = ExtResource("5_lwt3j")
 enemy = NodePath("../..")
+
+[node name="attacked" parent="StateMachine" index="4" node_paths=PackedStringArray("enemy")]
+script = ExtResource("8_ric7r")
+enemy = NodePath("../..")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." index="4"]
+texture_filter = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -11.0
+offset_right = 8.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 89.0
+nine_patch_stretch = true
+texture_under = ExtResource("10_ag3uy")
+texture_over = ExtResource("11_7woi5")
+texture_progress = ExtResource("11_glm15")

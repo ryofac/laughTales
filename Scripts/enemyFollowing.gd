@@ -30,6 +30,8 @@ var directionsArray = [];
 var alertTimer: float;
 
 func enter():
+	enemy.being_attacked.connect(_on_enemy_being_attacked);
+	
 	enemy.canMove = true
 	# Populando os arrays de interesse e perigo, além do de valores
 	interestArray.resize(numRays);
@@ -46,6 +48,10 @@ func enter():
 	alertTimer = 1;
 
 func update(delta):
+	
+	if enemy.is_dying:
+		Transitioned.emit(self, "idle");
+		
 	if alertTimer <= 0:
 		if followingTimer > 0:
 			followingTimer -= delta
@@ -55,6 +61,7 @@ func update(delta):
 			
 	alertTimer -= delta;
 	
+
 # Vai seguir o player de acordo seu vetor direção
 func physics_update(delta):
 	
@@ -92,3 +99,5 @@ func chooseDirection():
 	enemy.direction = dir.normalized();
 	
 	
+func _on_enemy_being_attacked():
+	Transitioned.emit(self, "attacked");
