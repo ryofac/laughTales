@@ -43,6 +43,7 @@ func _process(delta):
 	
 	crosshair_animation();
 	manageSprite();
+	life_bar.value = move_toward(life_bar.value, remainingLife, 0.168);
 	
 	if is_dying:
 		death_animation(delta);
@@ -67,7 +68,6 @@ func crosshair_animation():
 	$Crosshair.position = _newPosition;
 
 func take_damage(damage: float = 10.0):
-	
 	remainingLife -= damage;
 	being_attacked.emit()
 	
@@ -75,8 +75,8 @@ func take_damage(damage: float = 10.0):
 		##dropa item
 		canMove = false;
 		is_dying = true;
-		
 		spawn_particles();
+	DialogManager.spawnFloatingText("Ouch!", Color.WHITE, global_position)
 		
 func death_animation(delta: float):
 	deathTimer -= delta;

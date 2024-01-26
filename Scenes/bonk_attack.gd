@@ -3,14 +3,17 @@ class_name bonkAttackS
 @export var player: Player
 
 var sprite;
+var delay = 1.5;
 #var bonk_attack_texture = preload("res://Assets/Image/player/special_attack.png")
 
 #onEnter -> infelizmente timers tem que ser atualizados aqui para não ficarem 0
 @export var duraction = 0.5
 var attackTime = duraction;
+var attacked = false;
 
 func enter():
 	bonk()
+	attacked = false;
 	attackTime = duraction
 	super.enter()
 	
@@ -28,7 +31,10 @@ func update(delta):
 		sprite.play("bonk");
 
 func physics_update(delta):
-	pass
+	if !attacked:
+		for enemy in player.enemiesInRange:
+			enemy.take_damage(player.BONK_DAMAGE_AMOUNT);
+		attacked = true;
 
 func bonk():
 	player.canMove = false

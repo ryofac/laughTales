@@ -26,6 +26,7 @@ func update(delta):
 		sprite.play("walk");
 	else:
 		rotation_angle = 0
+		sprite.stop()
 		#if sprite:
 			#Transitioned.emit(self, "idle");
 			

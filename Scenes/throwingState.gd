@@ -38,5 +38,6 @@ func throw_ball():
 	player.get_parent().add_child(_b);
 	_b.global_position = player.global_position
 	_b.dir = throwDirection;
+	_b.damage = player.THROWING_ATTACK_AMOUNT;
 	animateSprite();
 	
