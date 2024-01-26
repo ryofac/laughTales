@@ -8,15 +8,20 @@ var followingTimer: float;
 
 var interestArray = [];
 var dangerArray = [];
-
 var directionsArray = [];
+var contextMap = [];
+
+@onready var navAgent : NavigationAgent2D = enemy.navAgent;
 
 # O quanto os raios são projetados!
 @export var seeAmount = 100;
 
 # Número de direções ( eixos ) que o inimigo pode seguir
 @export var numRays = 8;
-@export var steerForce = 0.1;
+@export var maxSteerForce = 0.1;
+@export var flee : bool; 
+@export var roundMovementAmount: float = 0;
+var desirableDir: Vector2;
 
 # O que deve ser feito:
 # Coletar dados: descobrir um meio de coletar esses dados de cada um desses vetores
@@ -30,13 +35,13 @@ var directionsArray = [];
 var alertTimer: float;
 
 func enter():
-	enemy.being_attacked.connect(_on_enemy_being_attacked);
-	
+	enemy.being_attacked.connect(_on_enemy_being_attacked)
 	enemy.canMove = true
 	# Populando os arrays de interesse e perigo, além do de valores
 	interestArray.resize(numRays);
 	dangerArray.resize(numRays);
 	directionsArray.resize(numRays);
+	contextMap.resize(numRays);
 	
 	# Agora vem uma parte importante! a de distribuição dos eixos ao longo do inimigo:
 	for i in numRays:
@@ -44,11 +49,10 @@ func enter():
 		# Primeiro pega a base com o RIGHT e depois roda em relação ao ângulo
 		directionsArray[i] = Vector2.RIGHT.rotated(angle)
 	
-	followingTimer = 10
+	followingTimer = 30
 	alertTimer = 1;
 
 func update(delta):
-	
 	if enemy.is_dying:
 		Transitioned.emit(self, "idle");
 		
@@ -64,22 +68,26 @@ func update(delta):
 
 # Vai seguir o player de acordo seu vetor direção
 func physics_update(delta):
-	
 	# populando os arrays de interesse, perigo e escolhendo a direção que o inimigo deve ir
 	setInterest();
 	setDanger();
 	chooseDirection();
-		
-	enemy.velocity = enemy.speed * enemy.direction
-	
+	var desVel = desirableDir * enemy.speed;
+	if flee: desVel = -desVel
+	var steeringForce = desVel - enemy.velocity;
+	steeringForce *= 1 + roundMovementAmount
+	enemy.direction = desirableDir;
+	enemy.velocity = enemy.velocity + (steeringForce * maxSteerForce);
 	#enemy.alert_popup.visible = alertTimer > 0;
 
 func setInterest():
+	if navAgent.is_navigation_finished():
+		return;
 	if player:
-		var desiredDirection = (player.global_position - enemy.global_position).normalized();
+		var desiredDirection = enemy.to_local(navAgent.get_next_path_position()).normalized();
 		for i in numRays:
 			var dir = directionsArray[i].rotated(enemy.rotation).dot(desiredDirection);
-			interestArray[i] = max(0, dir)
+			interestArray[i] = dir
 
 func setDanger():
 	# interssectar raycasts para indentificar onde há colisões ( paredes )
@@ -87,17 +95,30 @@ func setDanger():
 	for i in numRays:
 		var result = spaceState.intersect_ray(
 			PhysicsRayQueryParameters2D.create(enemy.position, enemy.position + directionsArray[i].rotated(enemy.rotation) * seeAmount))
-		dangerArray[i] = 1 if result else 0;
+		dangerArray[i] = 5 if result else 0;
 
 func chooseDirection():
 	for i in numRays:
-		if dangerArray[i] > 0:
-			interestArray[i] = 0;
-	var dir = Vector2.ZERO;
-	for i in numRays:
-		dir += interestArray[i] * directionsArray[i];
-	enemy.direction = dir.normalized();
+		contextMap[i] = interestArray[i] - dangerArray[i]
+		
+	var _greaterInd = contextMap[0]
 	
+	for i in numRays:
+		if contextMap[i] >= contextMap[_greaterInd]:
+			_greaterInd = i;
+
+	desirableDir = directionsArray[_greaterInd];
+
+func recalcPath():
+	if player:
+		navAgent.target_position = player.global_position
+	else:
+		navAgent.target_position = enemy.spawnPosition
+		
 	
 func _on_enemy_being_attacked():
 	Transitioned.emit(self, "attacked");
+
+
+func _on_recalc_path_timer_timeout():
+	recalcPath()

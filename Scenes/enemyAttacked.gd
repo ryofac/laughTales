@@ -33,6 +33,7 @@ func physics_update(delta):
 	
 	enemy.direction = Vector2.ZERO;
 	enemy.global_position += 1 * knockback_dir;
+	enemy.velocity = enemy.speed * enemy.direction * int(enemy.canMove)
 
 
 

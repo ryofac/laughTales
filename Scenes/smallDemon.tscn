@@ -106,7 +106,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" instance=ExtResource("1_cvju7")]
+[node name="Enemy" node_paths=PackedStringArray("navAgent") instance=ExtResource("1_cvju7")]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+navAgent = NodePath("Navigation/NavigationAgent2D")
 speed = 40.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
@@ -127,6 +130,7 @@ enemy = NodePath("../..")
 [node name="following" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
 script = ExtResource("6_xbgso")
 seeAmount = 50
+maxSteerForce = 0.02
 enemy = NodePath("../..")
 
 [node name="wandering" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
@@ -154,3 +158,11 @@ nine_patch_stretch = true
 texture_under = ExtResource("10_ag3uy")
 texture_over = ExtResource("11_7woi5")
 texture_progress = ExtResource("11_glm15")
+
+[node name="NavigationAgent2D" parent="Navigation" index="0"]
+debug_enabled = true
+
+[node name="RecalcPathTimer" parent="Navigation" index="1"]
+autostart = true
+
+[connection signal="timeout" from="Navigation/RecalcPathTimer" to="StateMachine/following" method="_on_recalc_path_timer_timeout"]

@@ -28,4 +28,14 @@ shape = SubResource("RectangleShape2D_lxm72")
 
 [node name="Crosshair" type="Sprite2D" parent="."]
 texture_filter = 1
+position = Vector2(3, 0)
 texture = ExtResource("2_si8pn")
+
+[node name="Navigation" type="Node2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation"]
+
+[node name="RecalcPathTimer" type="Timer" parent="Navigation"]
+wait_time = 0.5
+
+[connection signal="timeout" from="Navigation/RecalcPathTimer" to="." method="_on_recalc_path_timer_timeout"]

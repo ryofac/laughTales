@@ -5,7 +5,7 @@ var idleTime: float;
 
 func enter():
 	enemy.being_attacked.connect(_on_enemy_being_attacked);
-	enemy.canMove = false
+	enemy.velocity = Vector2.ZERO;
 	idleTime = 2
 	
 func update(delta):
