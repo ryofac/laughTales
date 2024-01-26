@@ -18,7 +18,6 @@ func _process(delta):
 		
 		if collider:
 			if collider.get_collider() is Enemy: 
-				print("dano dano")
 				collider.get_collider().take_damage(damage)
 			dir = dir.bounce(collider.get_normal());
 			timer = 0.05;

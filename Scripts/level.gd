@@ -13,8 +13,8 @@ func _ready():
 	# Por em um local global posteriormente
 	randomize()
 	instantiatePlayer(START_POSITION)
-	instantiateEnemy(START_POSITION + Vector2(10, 10))
-	instantiateEnemy(START_POSITION + Vector2(20, 20))
+	instantiateEnemy(START_POSITION + Vector2(40, 20))
+	instantiateEnemy(START_POSITION + Vector2(60, 20))
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

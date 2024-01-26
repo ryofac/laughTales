@@ -1,13 +1,15 @@
-[gd_scene load_steps=22 format=3 uid="uid://caye0v83rm6ni"]
+[gd_scene load_steps=26 format=3 uid="uid://caye0v83rm6ni"]
 
 [ext_resource type="Texture2D" uid="uid://c4vgsr8uv7vdc" path="res://Assets/Image/player/normal.png" id="1_hr50d"]
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_whlpr"]
 [ext_resource type="Texture2D" uid="uid://j6ehl7sxnsyx" path="res://Assets/Image/player/walking.png" id="2_b52rk"]
 [ext_resource type="Texture2D" uid="uid://bgxb526chlsqd" path="res://Assets/Image/player/special_attack.png" id="2_shyjq"]
+[ext_resource type="Texture2D" uid="uid://c17roibtmxt78" path="res://Assets/Image/player/hit.png" id="3_mndmk"]
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_px7sx"]
 [ext_resource type="Script" path="res://Scenes/walkingStatePlayer.gd" id="4_f4hrv"]
 [ext_resource type="Script" path="res://Scenes/bonk_attack.gd" id="5_tcloc"]
 [ext_resource type="Script" path="res://Scenes/throwingState.gd" id="8_5gduc"]
+[ext_resource type="Script" path="res://Scripts/playerAttacked.gd" id="9_814mo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kiiwv"]
 atlas = ExtResource("2_shyjq")
@@ -24,6 +26,14 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fn6h5"]
 atlas = ExtResource("2_shyjq")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h25wy"]
+atlas = ExtResource("3_mndmk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1aqs5"]
+atlas = ExtResource("3_mndmk")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4q7b"]
 atlas = ExtResource("2_b52rk")
@@ -73,6 +83,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_h25wy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1aqs5")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_hr50d")
 }],
 "loop": true,
@@ -110,19 +131,18 @@ size = Vector2(16, 16)
 radius = 64.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 14
 script = ExtResource("1_whlpr")
 BONK_DAMAGE_AMOUNT = 100.0
 THROWING_ATTACK_AMOUNT = 20.0
 speed = 50.0
+maxLife = 100.0
 
 [node name="animSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_tw2wd")
-animation = &"bonk"
-frame = 4
-frame_progress = 1.0
+animation = &"hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_r40n8")
@@ -147,6 +167,10 @@ player = NodePath("../..")
 
 [node name="throwing" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("8_5gduc")
+player = NodePath("../..")
+
+[node name="attacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("9_814mo")
 player = NodePath("../..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
