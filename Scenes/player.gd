@@ -67,7 +67,7 @@ func getEnemies():
 	var range_area = $rangeArea as Area2D;
 	# pega todos os corpos em contato e filtra apenas os inimigos
 	if range_area.has_overlapping_bodies():
-		enemiesInRange = range_area.get_overlapping_bodies().filter(func(x): return x is Enemy) as Array[Enemy];
+		enemiesInRange = range_area.get_overlapping_bodies().filter(func(x): return x is Enemy and !x.is_dying) as Array[Enemy];
 		enemiesInRange.sort_custom(func(a, b): return self.global_position.distance_to(a.global_position) < self.global_position.distance_to(b.global_position))
 	else:
 		enemiesInRange = []

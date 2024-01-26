@@ -67,7 +67,7 @@ func crosshair_animation():
 	)
 	$Crosshair.position = _newPosition;
 
-func take_damage(damage: float = 10.0):
+func take_damage(damage: float = 0.0):
 	remainingLife -= damage;
 	being_attacked.emit()
 	

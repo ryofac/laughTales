@@ -18,12 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 DialogManager="*res://Scripts/Singletons/DialogManager.gd"
+HealthManager="*res://healthManager.gd"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/resizable=false
 window/size/window_width_override=1080
 window/size/window_height_override=720
 window/stretch/mode="viewport"
@@ -43,6 +43,11 @@ change_target={
 tome={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"echo":false,"script":null)
+]
+}
+spawnEnemies={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"echo":false,"script":null)
 ]
 }
 

@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://cf4kmbftnaom4"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/hud.gd" id="1_2wiig"]
+[ext_resource type="Texture2D" uid="uid://dfgqhm37q6cbc" path="res://Assets/Image/other/cristal_vida.png" id="2_q1ulf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8bep3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q1ulf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ainva"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q1ulf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p1mda"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q1ulf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pq85l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q1ulf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3w0u3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q1ulf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_2wiig")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="balloon1" type="AnimatedSprite2D" parent="Control"]
+sprite_frames = SubResource("SpriteFrames_8bep3")
+
+[node name="balloon2" type="AnimatedSprite2D" parent="Control"]
+sprite_frames = SubResource("SpriteFrames_ainva")
+
+[node name="balloon3" type="AnimatedSprite2D" parent="Control"]
+sprite_frames = SubResource("SpriteFrames_p1mda")
+
+[node name="balloon4" type="AnimatedSprite2D" parent="Control"]
+sprite_frames = SubResource("SpriteFrames_pq85l")
+
+[node name="balloon5" type="AnimatedSprite2D" parent="Control"]
+sprite_frames = SubResource("SpriteFrames_3w0u3")
