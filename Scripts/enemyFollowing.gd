@@ -34,8 +34,11 @@ var desirableDir: Vector2;
 # Tempo que ele permanece parado antes da perseguição
 var alertTimer: float;
 
-func enter():
+func _ready():
 	enemy.being_attacked.connect(_on_enemy_being_attacked)
+	enemy.player_on_attack_area.connect(_on_enemy_player_on_attack_area)
+
+func enter():
 	enemy.canMove = true
 	# Populando os arrays de interesse e perigo, além do de valores
 	interestArray.resize(numRays);
@@ -55,6 +58,7 @@ func enter():
 func update(delta):
 	if enemy.is_dying:
 		Transitioned.emit(self, "idle");
+		return;
 		
 	if alertTimer <= 0:
 		if followingTimer > 0:
@@ -117,8 +121,12 @@ func recalcPath():
 		
 	
 func _on_enemy_being_attacked():
-	Transitioned.emit(self, "attacked");
+	if !enemy.is_dying: Transitioned.emit(self, "attacked");
 
 
 func _on_recalc_path_timer_timeout():
 	recalcPath()
+
+func _on_enemy_player_on_attack_area():
+	if !enemy.is_dying: Transitioned.emit(self, "attacking");
+

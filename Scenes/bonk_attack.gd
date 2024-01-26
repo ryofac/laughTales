@@ -15,11 +15,12 @@ func enter():
 	bonk()
 	attacked = false;
 	attackTime = duraction
+	
 	super.enter()
 	
 
 func update(delta):
-	sprite = player.anim_sprite as AnimatedSprite2D
+	sprite = player.sprite as AnimatedSprite2D
 	resetSpritePosition()
 	if attackTime > 0:
 		attackTime -= delta;
@@ -44,7 +45,9 @@ func bonk():
 	player.spawnBonkArea() 
 
 func resetSpritePosition():
-	sprite.rotation_degrees = lerp(sprite.rotation_degrees, 0.0, 0.1)
+	sprite.rotation_degrees = move_toward(sprite.rotation_degrees, 0.0, 0.1)
+
+
 
 #func changeTexture():
 	#if sprite.texture.resource_name != "special_attack":

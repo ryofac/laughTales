@@ -12,11 +12,15 @@ var sprite: AnimatedSprite2D;
 var dir;
 var rotation_angle: float
 
+func _ready():
+	player.being_attacked.connect(_on_player_being_attacked)
+	
 func enter():
 	player.canMove = true
+	
 
 func update(delta):
-	sprite = player.anim_sprite
+	sprite = player.sprite
 	#setWalkingSprite()
 	dir = player.direction
 	rotation_angle += 1
@@ -46,6 +50,11 @@ func _unhandled_input(event):
 #func setWalkingSprite():
 	#if sprite.texture.resource_name != "normal":
 		#sprite.texture = walkingTexture
+		
+func _on_player_being_attacked():
+	if player.attackingEnemy and !player.attackingEnemy.is_dying:
+		Transitioned.emit(self, "attacked")
+	
 		
 func physics_update(delta):
 	pass
