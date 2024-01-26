@@ -6,9 +6,11 @@ signal being_attacked;
 var particlesScene = preload("res://Scenes/particle.tscn");
 @onready var sprite = $AnimatedSprite2D as AnimatedSprite2D;
 @onready var life_bar = $TextureProgressBar as TextureProgressBar;
+@export var navAgent : NavigationAgent2D;
 
 #Preciso da referencia do player, mas ela aparece só nos estados
 @onready var player = get_tree().get_first_node_in_group("player") as Player
+var spawnPosition: Vector2
 
 var on_target: bool = false;
 
@@ -26,11 +28,13 @@ var counter = 0;
 var remainingLife: float;
 
 func _ready():
+	spawnPosition = global_position
 	remainingLife = maxLife
 	life_bar.max_value = maxLife;
+	navAgent.path_desired_distance = 4;
+	navAgent.target_desired_distance = 4;
 
 func _physics_process(delta):
-	velocity = speed * direction * int(canMove)
 	move_and_slide();
 	
 func _process(delta):
@@ -50,7 +54,7 @@ func manageSprite():
 	
 	if !velocity.is_zero_approx():
 		sprite.play("run")
-		sprite.flip_h = direction.x < 0
+		sprite.flip_h = velocity.normalized().x < 0
 	else:
 		if sprite.animation != "hit":
 			sprite.play("idle")

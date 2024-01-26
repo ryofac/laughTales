@@ -37,10 +37,6 @@ func _process(delta):
 	
 	getEnemies();
 	defineTarget();
-	
-	if Input.is_action_just_pressed("throw_attack"):
-		print(enemiesInRange);
-	
 	velocity = speed * direction * int(canMove)
 	move_and_slide()
 
@@ -84,8 +80,6 @@ func defineTarget():
 		return
 	
 	if Input.is_action_just_pressed("change_target"):
-		print("Mudando target : index agora é %d" % targetIndex)
-		print(enemiesInRange)
 		targetIndex += 1
 		targetIndex = targetIndex % enemiesInRange.size()
 		target = enemiesInRange[targetIndex];

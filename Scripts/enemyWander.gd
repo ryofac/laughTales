@@ -32,7 +32,8 @@ func update(delta):
 
 
 func physics_update(delta):
-	pass
+	enemy.velocity = enemy.speed * enemy.direction * int(enemy.canMove);
+	
 
 
 func _on_enemy_being_attacked():
