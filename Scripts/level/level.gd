@@ -8,6 +8,7 @@ var player: Player;
 const START_POSITION := Vector2(300, 200)
 
 func _ready():
+	print("Sendo spawnado!")
 	randomize()
 	instantiatePlayer(START_POSITION)
 	

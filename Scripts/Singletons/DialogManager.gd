@@ -6,6 +6,7 @@ var dialogue_lines : Array[String] = []
 var currentLineIndex = 0;
 var isDialogueActive = false
 var canAdvanceLine = false
+var level: Node = null;
 
 var textBox
 var textBoxPosition: Vector2
@@ -22,7 +23,7 @@ func startDialogue(position: Vector2, lines: Array[String]):
 func showTextBox():
 	textBox = textBoxScene.instantiate() as TextBox
 	textBox.finished_typing.connect(_on_finished_typing_text_box)
-	get_tree().root.add_child(textBox)
+	level.add_child(textBox)
 	textBox.global_position = textBoxPosition
 	textBox.showText(dialogue_lines[currentLineIndex])
 	canAdvanceLine = false
@@ -58,4 +59,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if !level: level = find_child("Level");
