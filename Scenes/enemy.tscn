@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dm6itx56ensml"]
 
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_68gf3"]
+[ext_resource type="Script" path="res://Scripts/enemy/enemy.gd" id="1_68gf3"]
 [ext_resource type="Texture2D" uid="uid://dbo2a6arp5ahs" path="res://Assets/Image/crosshair/PNG/Outline/crosshair026.png" id="2_si8pn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxm72"]

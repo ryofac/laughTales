@@ -1,15 +1,15 @@
 [gd_scene load_steps=26 format=3 uid="uid://caye0v83rm6ni"]
 
+[ext_resource type="Script" path="res://Scripts/player/player.gd" id="1_61qau"]
 [ext_resource type="Texture2D" uid="uid://c4vgsr8uv7vdc" path="res://Assets/Image/player/normal.png" id="1_hr50d"]
-[ext_resource type="Script" path="res://Scenes/player.gd" id="1_whlpr"]
 [ext_resource type="Texture2D" uid="uid://j6ehl7sxnsyx" path="res://Assets/Image/player/walking.png" id="2_b52rk"]
 [ext_resource type="Texture2D" uid="uid://bgxb526chlsqd" path="res://Assets/Image/player/special_attack.png" id="2_shyjq"]
 [ext_resource type="Texture2D" uid="uid://c17roibtmxt78" path="res://Assets/Image/player/hit.png" id="3_mndmk"]
-[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="3_px7sx"]
-[ext_resource type="Script" path="res://Scenes/walkingStatePlayer.gd" id="4_f4hrv"]
-[ext_resource type="Script" path="res://Scenes/bonk_attack.gd" id="5_tcloc"]
-[ext_resource type="Script" path="res://Scenes/throwingState.gd" id="8_5gduc"]
-[ext_resource type="Script" path="res://Scripts/playerAttacked.gd" id="9_814mo"]
+[ext_resource type="Script" path="res://Scripts/state/StateMachine.gd" id="3_px7sx"]
+[ext_resource type="Script" path="res://Scripts/player/walkingStatePlayer.gd" id="7_i4i31"]
+[ext_resource type="Script" path="res://Scripts/player/bonk_attack.gd" id="8_wudo0"]
+[ext_resource type="Script" path="res://Scripts/player/throwingState.gd" id="9_fvma3"]
+[ext_resource type="Script" path="res://Scripts/player/playerAttacked.gd" id="10_k6c74"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kiiwv"]
 atlas = ExtResource("2_shyjq")
@@ -133,7 +133,7 @@ radius = 64.0
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 3
 collision_mask = 14
-script = ExtResource("1_whlpr")
+script = ExtResource("1_61qau")
 BONK_DAMAGE_AMOUNT = 100.0
 THROWING_ATTACK_AMOUNT = 20.0
 speed = 50.0
@@ -158,19 +158,19 @@ script = ExtResource("3_px7sx")
 initialState = NodePath("walking")
 
 [node name="walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("4_f4hrv")
+script = ExtResource("7_i4i31")
 player = NodePath("../..")
 
 [node name="bonk_attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("5_tcloc")
+script = ExtResource("8_wudo0")
 player = NodePath("../..")
 
 [node name="throwing" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("8_5gduc")
+script = ExtResource("9_fvma3")
 player = NodePath("../..")
 
 [node name="attacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
-script = ExtResource("9_814mo")
+script = ExtResource("10_k6c74")
 player = NodePath("../..")
 
 [node name="Camera2D" type="Camera2D" parent="."]

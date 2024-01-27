@@ -2,7 +2,7 @@ extends State
 
 class_name playerAttackedS
 
-var timeToStop = 0.8;
+var timeToStop = 0.5;
 var timer;
 var enemy;
 var played = false

@@ -1,12 +1,12 @@
 [gd_scene load_steps=4 format=3 uid="uid://buv8jm7yyu32m"]
 
-[ext_resource type="Script" path="res://Scenes/floatingText.gd" id="1_weq4o"]
+[ext_resource type="Script" path="res://Scripts/gui/floatingText.gd" id="1_w2jc1"]
 [ext_resource type="FontFile" uid="uid://djnjk7u7e6505" path="res://Assets/Fonts/Kenney Mini.ttf" id="2_c86k8"]
 
 [sub_resource type="Theme" id="Theme_j1635"]
 
 [node name="FloatingText" type="Node2D"]
-script = ExtResource("1_weq4o")
+script = ExtResource("1_w2jc1")
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 1

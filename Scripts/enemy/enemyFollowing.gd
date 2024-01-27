@@ -128,5 +128,6 @@ func _on_recalc_path_timer_timeout():
 	recalcPath()
 
 func _on_enemy_player_on_attack_area():
-	if !enemy.is_dying: Transitioned.emit(self, "attacking");
+	if !enemy.is_dying and !player.under_attack: 
+		Transitioned.emit(self, "attacking");
 
