@@ -137,7 +137,7 @@ script = ExtResource("1_whlpr")
 BONK_DAMAGE_AMOUNT = 100.0
 THROWING_ATTACK_AMOUNT = 20.0
 speed = 50.0
-maxLife = 100.0
+maxLife = 5.0
 
 [node name="animSprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

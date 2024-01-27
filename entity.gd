@@ -16,8 +16,11 @@ var damagePhrases: Array[String] = ["Outch!"];
 @export var maxLife: float = 50.0;
 var direction: Vector2 = Vector2.ZERO;
 var remainingLife: float = 100;
+
+
 func take_damage(damage: float = 10.0):
 	remainingLife -= damage;
+	
 	being_attacked.emit()
 	if remainingLife <= 0:
 		##dropa item

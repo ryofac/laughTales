@@ -31,6 +31,10 @@ func _ready():
 	#toma dano
 	damagePhrases = ["Its not a joke!", "This is not fun!", "That hurt! :/"]
 	colorDamage = Color.RED
+	
+	maxLife = 5;
+	remainingLife = maxLife;
+	HealthManager.set_initial_life(maxLife);
 
 
 func _process(delta):
@@ -57,7 +61,9 @@ func talk():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_home"):
-		talk()
+		#talk()
+		if remainingLife < maxLife:
+			HealthManager.increase_life(1);
 		
 		
 func spawnBonkArea():

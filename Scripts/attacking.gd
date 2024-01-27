@@ -21,6 +21,9 @@ func enter():
 	player.being_attacked.emit();
 	player.attackingEnemy = enemy;
 	player.take_damage(enemy.PLAYER_DAMAGE)
+	
+	HealthManager.decrease_life(player.remainingLife);
+	
 	canAttack = false;
 	colldownTimer.start(enemy.COOLDOWN_ATTACK_TIME)
 
