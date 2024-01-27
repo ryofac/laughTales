@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjcwy7gbqp402"]
 
-[ext_resource type="Script" path="res://Scripts/text_box.gd" id="1_w35k1"]
+[ext_resource type="Script" path="res://Scripts/gui/text_box.gd" id="1_w35k1"]
 [ext_resource type="Texture2D" uid="uid://txeypyrebyet" path="res://Assets/Image/other/speech_box.png" id="2_764t6"]
 [ext_resource type="FontFile" uid="uid://djnjk7u7e6505" path="res://Assets/Fonts/Kenney Mini.ttf" id="2_y73ri"]
 

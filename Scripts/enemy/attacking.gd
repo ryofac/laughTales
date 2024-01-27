@@ -16,6 +16,7 @@ func enter():
 		Transitioned.emit(self, "following")
 		return;
 	
+	player.under_attack = true;
 	enemy.velocity = Vector2.ZERO;
 	enemy.sprite.rotation_degrees = 45 * enemy.direction.x;
 	player.being_attacked.emit();
@@ -33,6 +34,7 @@ func update(delta):
 	if timeToFinish >= 0:
 		timeToFinish -= delta;
 	else:
+		player.under_attack = false;
 		Transitioned.emit(self, "following")
 		
 	

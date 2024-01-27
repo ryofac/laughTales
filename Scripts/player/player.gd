@@ -7,6 +7,9 @@ class_name Player
 @onready var sprite = $animSprite as AnimatedSprite2D;
 var attackingEnemy = null;
 
+#variável que serve de controle para os inimigos atacarem
+var under_attack = false;
+
 var bonk_area_efect = preload("res://Scenes/bonk_area_efect.tscn")
 var bonk_stream = [
 	preload("res://Assets/Audio/clown-horn.mp3"),

@@ -13,9 +13,7 @@ func _ready():
 func _process(delta):
 	var velocity = dir * SPEED;
 	if timer > 0:
-		#global_position += velocity; 
 		var collider = move_and_collide(velocity);
-		
 		if collider:
 			if collider.get_collider() is Enemy: 
 				collider.get_collider().take_damage(damage)

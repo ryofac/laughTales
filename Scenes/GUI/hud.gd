@@ -1,14 +1,12 @@
 extends CanvasLayer
 
 var origin: Vector2 = Vector2(10, 10);
-
 var balloonsArr: Array;
 var poppedBalloons: Array;
 var padding: int = 2;
 
 func _ready():
 	balloonsArr = get_node("Control").get_children()
-	
 	for i in range(balloonsArr.size()):
 		balloonsArr[i].position = origin + Vector2( (10 + padding) * i, 0);
 	
