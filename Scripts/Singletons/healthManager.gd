@@ -15,15 +15,16 @@ func _process(delta):
 	
 func set_initial_life(value: int):
 	current_amount_life = value;
+	print_rich("[color=blue] AGORA A VIDA É " + str(current_amount_life))
 
 func increase_life(amount: int):
-	if current_amount_life:
+	if current_amount_life < 5:
 		print_rich("[color=green]GANHOU")
 		life_increased.emit();
 		current_amount_life += amount;
 
 func decrease_life(amount: int):
-	if current_amount_life:
+	if current_amount_life > 0:
 		print_rich("[color=red]PERDEU PLAYBOY")
 		life_decreased.emit();
 		current_amount_life -= amount;

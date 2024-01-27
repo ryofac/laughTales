@@ -23,7 +23,7 @@ func enter():
 	player.attackingEnemy = enemy;
 	player.take_damage(enemy.PLAYER_DAMAGE)
 	
-	HealthManager.decrease_life(player.remainingLife);
+	HealthManager.decrease_life(enemy.PLAYER_DAMAGE);
 	
 	canAttack = false;
 	colldownTimer.start(enemy.COOLDOWN_ATTACK_TIME)
