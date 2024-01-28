@@ -71,7 +71,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bonk",
-"speed": 15.0
+"speed": 20.0
 }]
 
 [node name="bonkAreaEfect" type="Node2D"]
@@ -82,5 +82,7 @@ script = ExtResource("1_kqs26")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_8f2sl")
 animation = &"bonk"
+frame = 8
+frame_progress = 1.0
 
 [connection signal="animation_finished" from="areaSprite" to="." method="_on_area_sprite_animation_finished"]

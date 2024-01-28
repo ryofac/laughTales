@@ -2,6 +2,8 @@ extends CanvasLayer
 
 const PARTICLES_BALLOON = preload("res://Scenes/GUI/particles_balloon.tscn");
 
+@onready var pop = $pop as AudioStreamPlayer2D;
+
 var origin: Vector2 = Vector2(15, 15);
 var balloonsArr: Array;
 var poppedBalloons: Array;
@@ -42,9 +44,14 @@ func _on_decreased_life():
 	if !balloonsArr.is_empty():
 		var _lastBall = balloonsArr.pop_back() as AnimatedSprite2D;
 		
+		#await get_tree().create_timer()
+		
 		#animação dela explodindo
 		_lastBall.play("popping");
 		spawnParticles(_lastBall);
+		
+		# Som de estouro
+		pop.play();
 		
 		counter -= 1;
 		#_lastBall.visible = false;

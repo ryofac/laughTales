@@ -3,8 +3,10 @@ class_name Player
 	
 #var enemy: Enemy
 
-@onready var audio_player = $Bonk as AudioStreamPlayer2D;
+@onready var audio_bonk = $Audio/Bonk as AudioStreamPlayer2D;
+@onready var audio_throwing = $Audio/Throwing as AudioStreamPlayer2D;
 @onready var sprite = $animSprite as AnimatedSprite2D;
+
 var attackingEnemy = null;
 
 #variável que serve de controle para os inimigos atacarem
@@ -12,13 +14,13 @@ var under_attack = false;
 
 var bonk_area_efect = preload("res://Scenes/bonk_area_efect.tscn")
 var bonk_stream = [
-	preload("res://Assets/Audio/clown-horn.mp3"),
-	preload("res://Assets/Audio/clown-horn_1.mp3"),
-	preload("res://Assets/Audio/clown-horn_2.mp3"),
-	preload("res://Assets/Audio/bicycle-horn.mp3"),
-	preload("res://Assets/Audio/bicycle-horn_1.mp3"),
-	preload("res://Assets/Audio/baby-squeak-toy.mp3"),
-	preload("res://Assets/Audio/squeaky-toy.mp3")
+	preload("res://Assets/Audio/Player/Horn/clown-horn.mp3"),
+	preload("res://Assets/Audio/Player/Horn/clown-horn_1.mp3"),
+	preload("res://Assets/Audio/Player/Horn/clown-horn_2.mp3"),
+	preload("res://Assets/Audio/Player/Horn/bicycle-horn.mp3"),
+	preload("res://Assets/Audio/Player/Horn/bicycle-horn_1.mp3"),
+	preload("res://Assets/Audio/Player/Horn/baby-squeak-toy.mp3"),
+	preload("res://Assets/Audio/Player/Horn/squeaky-toy.mp3")
 ]
 
 var enemiesInRange = [];
@@ -73,7 +75,7 @@ func spawnBonkArea():
 	var _b = bonk_area_efect.instantiate();
 	add_child(_b);
 	_b.global_position = global_position;
-	play_audio();
+	play_bonk();
 	
 # preciso que o target seja atualizado sempre, independente do estado atual;
 func getEnemies():
@@ -105,10 +107,10 @@ func _on_range_area_body_exited(body):
 		body.on_target = false;
 	
 		
-func play_audio():
+func play_bonk():
 	# define qual som
 	#TODO: Adicionar mais sons?
-	audio_player.stream = bonk_stream.pick_random();
+	audio_bonk.stream = bonk_stream.pick_random();
 	# variação para o som
-	audio_player.pitch_scale = randf_range(0.9, 1.1);
-	audio_player.play()
+	audio_bonk.pitch_scale = randf_range(0.9, 1.1);
+	audio_bonk.play()
