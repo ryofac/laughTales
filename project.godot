@@ -10,10 +10,16 @@ config_version=5
 
 [application]
 
-config/name="global-jam"
+config/name="Laugh Tales"
+config/version="1.0"
 run/main_scene="res://game_controller.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://Assets/Image/Labiras_Logo.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://Assets/Image/normal_grande.png"
+config/windows_native_icon="res://Assets/Image/normal.ico"
 
 [autoload]
 

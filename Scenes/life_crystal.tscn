@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv8g2qw1wjnbp"]
+[gd_scene load_steps=5 format=3 uid="uid://dv8g2qw1wjnbp"]
 
 [ext_resource type="Texture2D" uid="uid://dfgqhm37q6cbc" path="res://Assets/Image/other/cristal_vida.png" id="1_5vcnx"]
 [ext_resource type="Script" path="res://Scripts/Itens/life_crystal.gd" id="1_q6ko0"]
+[ext_resource type="AudioStream" uid="uid://73eue321no1s" path="res://Assets/Audio/Player/collect.mp3" id="3_wcilq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0yth3"]
 radius = 5.09902
@@ -16,5 +17,9 @@ texture = ExtResource("1_5vcnx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_0yth3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wcilq")
+pitch_scale = 1.5
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
