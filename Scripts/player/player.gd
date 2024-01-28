@@ -2,13 +2,16 @@ extends Entity
 class_name Player
 	
 #var enemy: Enemy
+signal died();
 
 @onready var audio_bonk = $Audio/Bonk as AudioStreamPlayer2D;
 @onready var audio_throwing = $Audio/Throwing as AudioStreamPlayer2D;
+@onready var audio_damage = $Audio/TakingDamage as AudioStreamPlayer2D;
 @onready var sprite = $animSprite as AnimatedSprite2D;
 
-var attackingEnemy = null;
 
+
+var attackingEnemy = null;
 #variável que serve de controle para os inimigos atacarem
 var under_attack = false;
 
@@ -26,6 +29,7 @@ var bonk_stream = [
 var enemiesInRange = [];
 var target: Enemy;
 var targetIndex = 0;
+var canBeAttacked = true;
 @export var BONK_DAMAGE_AMOUNT: float;
 @export var NORMAL_ATTACK_AMOUNT: float;
 @export var THROWING_ATTACK_AMOUNT: float;
@@ -41,7 +45,6 @@ func _ready():
 	remainingLife = maxLife;
 	HealthManager.set_initial_life(maxLife);
 
-
 func _process(delta):
 	direction.x = Input.get_axis("ui_left", "ui_right");
 	direction.y = Input.get_axis("ui_up", "ui_down");
@@ -51,7 +54,6 @@ func _process(delta):
 	if !direction and canMove:
 		if sprite.animation != "hit": sprite.play("idle");
 		sprite.rotation_degrees = lerp(sprite.rotation_degrees, 0.0, 0.1);
-		
 	getEnemies();
 	defineTarget();
 	velocity = speed * direction * int(canMove)
@@ -114,3 +116,4 @@ func play_bonk():
 	# variação para o som
 	audio_bonk.pitch_scale = randf_range(0.9, 1.1);
 	audio_bonk.play()
+	

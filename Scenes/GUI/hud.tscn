@@ -78,7 +78,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"popping",
-"speed": 7.0
+"speed": 16.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t8cj5"]
@@ -154,7 +154,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"popping",
-"speed": 7.0
+"speed": 16.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0giny"]
@@ -230,7 +230,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"popping",
-"speed": 7.0
+"speed": 16.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2m7b1"]
@@ -306,7 +306,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"popping",
-"speed": 7.0
+"speed": 16.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3qerw"]
@@ -382,7 +382,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"popping",
-"speed": 7.0
+"speed": 16.0
 }]
 
 [node name="HUD" type="CanvasLayer"]
@@ -400,7 +400,7 @@ scale = Vector2(2, 2)
 
 [node name="redBalloon" type="AnimatedSprite2D" parent="Control"]
 sprite_frames = SubResource("SpriteFrames_p0efk")
-animation = &"filling"
+animation = &"popping"
 
 [node name="greenBalloon" type="AnimatedSprite2D" parent="Control"]
 sprite_frames = SubResource("SpriteFrames_qlyi6")
@@ -408,7 +408,7 @@ animation = &"popping"
 
 [node name="blueBalloon" type="AnimatedSprite2D" parent="Control"]
 sprite_frames = SubResource("SpriteFrames_j7rfs")
-animation = &"filling"
+animation = &"popping"
 
 [node name="yellowBalloon" type="AnimatedSprite2D" parent="Control"]
 sprite_frames = SubResource("SpriteFrames_s78xx")
@@ -416,7 +416,7 @@ animation = &"popping"
 
 [node name="pinkBalloon" type="AnimatedSprite2D" parent="Control"]
 sprite_frames = SubResource("SpriteFrames_ucmix")
-animation = &"filling"
+animation = &"popping"
 
 [node name="pop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_jstre")

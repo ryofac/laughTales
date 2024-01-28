@@ -17,17 +17,17 @@ func enter():
 		return;
 	
 	
-	enemy.audio_attack.play();
-	
+	player.audio_damage.play();
 	player.under_attack = true;
 	enemy.velocity = Vector2.ZERO;
 	enemy.sprite.rotation_degrees = 45 * enemy.direction.x;
-	player.being_attacked.emit();
 	player.attackingEnemy = enemy;
-	player.take_damage(enemy.PLAYER_DAMAGE)
+	player.being_attacked.emit();
+	player.take_damage(player.attackingEnemy.PLAYER_DAMAGE);
+	
 	
 	# Pausa o fluxo do programa até que o sinal ativar 
-	await enemy.audio_attack.finished;
+	await player.audio_damage.finished;
 	
 	# Atualiza a HUD do player
 	HealthManager.decrease_life(enemy.PLAYER_DAMAGE);

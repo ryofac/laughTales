@@ -10,8 +10,8 @@ signal player_on_attack_area();
 @onready var player = get_tree().get_first_node_in_group("player") as Player
 @onready var attackRange = get_node("AttackRange") as Area2D;
 
-@onready var audio_attack = $Audio/Attack as AudioStreamPlayer2D;
 @onready var audio_death = $Audio/Death as AudioStreamPlayer2D;
+@onready var audio_damage = $Audio/TakingDamage as AudioStreamPlayer2D;
 
 var playerAttacked: Player;
 
@@ -85,5 +85,3 @@ func checkPlayerInAttackRange():
 func _input(event):
 	if event.is_action_pressed("tome"):
 		take_damage();
-
-

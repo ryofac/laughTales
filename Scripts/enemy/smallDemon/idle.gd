@@ -20,7 +20,7 @@ func update(delta):
 		return;
 	
 	if distance.length() < 50 and distance.normalized().dot(enemy.direction) > 0:
-		Transitioned.emit(self, "following");
+		Transitioned.emit(self, "attacking");
 	if idleTime > 0:
 		idleTime -= delta;
 	else:

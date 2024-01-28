@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://h3bsyhfrxior" path="res://Assets/Image/enemy/smallDemon/idle.png" id="2_mrlam"]
 [ext_resource type="Texture2D" uid="uid://fv26nawi5mto" path="res://Assets/Image/enemy/smallDemon/run.png" id="3_lbgg5"]
 [ext_resource type="Script" path="res://Scripts/state/StateMachine.gd" id="4_vgxk8"]
-[ext_resource type="Script" path="res://Scripts/enemy/idle.gd" id="6_15epy"]
-[ext_resource type="Script" path="res://Scripts/enemy/enemyFollowing.gd" id="7_elwc1"]
-[ext_resource type="Script" path="res://Scripts/enemy/attacking.gd" id="8_jgtcp"]
-[ext_resource type="Script" path="res://Scripts/enemy/enemyWander.gd" id="9_0lugw"]
+[ext_resource type="Script" path="res://Scripts/enemy/smallDemon/idle.gd" id="6_f2k4i"]
+[ext_resource type="Script" path="res://Scripts/enemy/smallDemon/enemyFollowing.gd" id="7_1d0pr"]
+[ext_resource type="Script" path="res://Scripts/enemy/smallDemon/attacking.gd" id="8_dk1dv"]
+[ext_resource type="Script" path="res://Scripts/enemy/smallDemon/enemyWander.gd" id="9_8783y"]
 [ext_resource type="Texture2D" uid="uid://cjq7lsolpfbr7" path="res://Assets/Image/gui/UI-pack-kenney/PNG/barBack_horizontalMid.png" id="10_ag3uy"]
-[ext_resource type="Script" path="res://Scripts/enemy/enemyAttacked.gd" id="10_i18d7"]
+[ext_resource type="Script" path="res://Scripts/enemy/smallDemon/enemyAttacked.gd" id="10_d3ld6"]
 [ext_resource type="Texture2D" uid="uid://chx36yghti2g" path="res://Assets/Image/gui/UI-pack-kenney/PNG/edge.png" id="11_7woi5"]
 [ext_resource type="Texture2D" uid="uid://rurricfbmdj5" path="res://Assets/Image/gui/UI-pack-kenney/PNG/barGreen_horizontalMid.png" id="11_glm15"]
 [ext_resource type="AudioStream" uid="uid://ed7d8suij0s3" path="res://Assets/Audio/Enemy/enemy_attack.mp3" id="14_wa6yv"]
@@ -113,7 +113,7 @@ animations = [{
 motion_mode = 1
 wall_min_slide_angle = 0.0
 navAgent = NodePath("Navigation/NavigationAgent2D")
-speed = 80.0
+speed = 20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 texture_filter = 1
@@ -124,27 +124,25 @@ animation = &"run"
 script = ExtResource("4_vgxk8")
 initialState = NodePath("idle")
 
-[node name="idle" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
-script = ExtResource("6_15epy")
+[node name="following" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("enemy")]
+script = ExtResource("7_1d0pr")
 enemy = NodePath("../..")
 
-[node name="following" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
-script = ExtResource("7_elwc1")
-seeAmount = 50
-maxSteerForce = 0.02
+[node name="idle" parent="StateMachine" index="1" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_f2k4i")
 enemy = NodePath("../..")
 
 [node name="attacking" parent="StateMachine" index="2" node_paths=PackedStringArray("colldownTimer", "enemy")]
-script = ExtResource("8_jgtcp")
+script = ExtResource("8_dk1dv")
 colldownTimer = NodePath("../../CoolDownAttackTimer")
 enemy = NodePath("../..")
 
 [node name="wandering" parent="StateMachine" index="3" node_paths=PackedStringArray("enemy")]
-script = ExtResource("9_0lugw")
+script = ExtResource("9_8783y")
 enemy = NodePath("../..")
 
 [node name="attacked" parent="StateMachine" index="4" node_paths=PackedStringArray("enemy")]
-script = ExtResource("10_i18d7")
+script = ExtResource("10_d3ld6")
 enemy = NodePath("../..")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." index="4"]
@@ -165,19 +163,23 @@ texture_under = ExtResource("10_ag3uy")
 texture_over = ExtResource("11_7woi5")
 texture_progress = ExtResource("11_glm15")
 
+[node name="NavigationAgent2D" parent="Navigation" index="0"]
+debug_enabled = true
+
 [node name="RecalcPathTimer" parent="Navigation" index="1"]
 autostart = true
 
 [node name="CoolDownAttackTimer" type="Timer" parent="." index="7"]
 wait_time = 0.5
 
-[node name="Attack" parent="Audio" index="0"]
-stream = ExtResource("14_wa6yv")
-volume_db = -10.0
-
-[node name="Death" parent="Audio" index="1"]
+[node name="Death" parent="Audio" index="0"]
 stream = ExtResource("15_8sfim")
 
+[node name="TakingDamage" type="AudioStreamPlayer2D" parent="Audio" index="1"]
+stream = ExtResource("14_wa6yv")
+volume_db = -10.0
+pitch_scale = 4.0
+panning_strength = 0.42
+
 [connection signal="timeout" from="Navigation/RecalcPathTimer" to="StateMachine/following" method="_on_recalc_path_timer_timeout"]
-[connection signal="body_entered" from="AttackRange" to="StateMachine/following" method="_on_attack_range_body_entered"]
 [connection signal="timeout" from="CoolDownAttackTimer" to="StateMachine/attacking" method="_on_cool_down_attack_timer_timeout"]

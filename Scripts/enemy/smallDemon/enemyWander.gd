@@ -1,5 +1,4 @@
 extends EnemyState
-class_name enemyWanderS
 
 # Nesse estado, o inimigo fica se movendo em posições aleatórias
 var timeToStop = randf_range(1, 2)
@@ -27,6 +26,7 @@ func update(delta):
 	
 	if distance.length() < 50  and distance.normalized().dot(enemy.direction) > 0:
 		Transitioned.emit(self, "following");
+		
 	if timeToStop > 0:
 		timeToStop -= delta
 	else:
@@ -34,7 +34,7 @@ func update(delta):
 
 
 func physics_update(delta):
-	enemy.velocity = enemy.speed * enemy.direction * int(enemy.canMove);
+	enemy.velocity = enemy.speed * enemy.direction;
 	
 
 

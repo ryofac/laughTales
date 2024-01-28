@@ -32,7 +32,7 @@ func update(delta):
 
 func animate_walk():
 	var sin_angle = sin(deg_to_rad(rotation_angle) * ANIMATION_SPEED) * 10
-	if dir.x != 0:
+	if dir and dir.x != 0:
 		sprite.flip_h = player.direction.x < 0
 	sprite.rotation_degrees = sin_angle
 	
@@ -57,10 +57,10 @@ func _unhandled_input(event):
 		#sprite.texture = walkingTexture
 		
 func _on_player_being_attacked():
-	var _weakRef = weakref(player.attackingEnemy)
-	if _weakRef:
-		if !player.attackingEnemy or player.attackingEnemy.is_dying : return;
-		Transitioned.emit(self, "attacked")
+	#var _weakRef = weakref(player.attackingEnemy)
+	#if _weakRef:
+		#if !player.attackingEnemy or player.attackingEnemy.is_dying : return;
+	Transitioned.emit(self, "attacked")
 		
 	
 		

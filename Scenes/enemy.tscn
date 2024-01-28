@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dm6itx56ensml"]
 
-[ext_resource type="Script" path="res://Scripts/enemy/enemy.gd" id="1_68gf3"]
+[ext_resource type="Script" path="res://Scripts/enemy/smallDemon/enemy.gd" id="1_68gf3"]
 [ext_resource type="Texture2D" uid="uid://dbo2a6arp5ahs" path="res://Assets/Image/crosshair/PNG/Outline/crosshair026.png" id="2_si8pn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lxm72"]
@@ -20,8 +20,6 @@ shape = SubResource("RectangleShape2D_lxm72")
 [node name="StateMachine" type="Node" parent="."]
 
 [node name="idle" type="Node" parent="StateMachine"]
-
-[node name="following" type="Node" parent="StateMachine"]
 
 [node name="attacking" type="Node" parent="StateMachine"]
 
@@ -49,8 +47,6 @@ shape = SubResource("CircleShape2D_tna78")
 debug_color = Color(0.964706, 0, 0.490196, 0.419608)
 
 [node name="Audio" type="Node2D" parent="."]
-
-[node name="Attack" type="AudioStreamPlayer2D" parent="Audio"]
 
 [node name="Death" type="AudioStreamPlayer2D" parent="Audio"]
 
