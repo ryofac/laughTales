@@ -9,8 +9,6 @@ signal died();
 @onready var audio_damage = $Audio/TakingDamage as AudioStreamPlayer2D;
 @onready var sprite = $animSprite as AnimatedSprite2D;
 
-
-
 var attackingEnemy = null;
 #variável que serve de controle para os inimigos atacarem
 var under_attack = false;
@@ -25,6 +23,10 @@ var bonk_stream = [
 	preload("res://Assets/Audio/Player/Horn/baby-squeak-toy.mp3"),
 	preload("res://Assets/Audio/Player/Horn/squeaky-toy.mp3")
 ]
+
+@export var MAX_JOY = 100;
+@export var joySpent = 25;
+var remainingJoy;
 
 var enemiesInRange = [];
 var target: Enemy;
@@ -44,6 +46,9 @@ func _ready():
 	maxLife = 5;
 	remainingLife = maxLife;
 	HealthManager.set_initial_life(maxLife);
+	
+	remainingJoy = MAX_JOY;
+	
 
 func _process(delta):
 	direction.x = Input.get_axis("ui_left", "ui_right");
@@ -117,3 +122,15 @@ func play_bonk():
 	audio_bonk.pitch_scale = randf_range(0.9, 1.1);
 	audio_bonk.play()
 	
+func healing(value: int):
+	if remainingLife < 5:
+		remainingLife += value
+		HealthManager.increase_life(value);
+
+func regaining_joy(value: int):
+	remainingJoy += value;
+	
+	if remainingJoy > MAX_JOY:
+		remainingJoy = 100;
+	
+	HealthManager.update_joy(remainingJoy)

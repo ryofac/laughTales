@@ -1,9 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://cf4kmbftnaom4"]
+[gd_scene load_steps=57 format=3 uid="uid://cf4kmbftnaom4"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/hud.gd" id="1_2wiig"]
 [ext_resource type="Texture2D" uid="uid://bfphpj61hvy3q" path="res://Assets/Image/other/balloon_filling.png" id="2_0cqyj"]
 [ext_resource type="Texture2D" uid="uid://48p8muejn7hm" path="res://Assets/Image/other/balloon_popping.png" id="2_dbmxb"]
+[ext_resource type="Texture2D" uid="uid://b1qtnswwea3uh" path="res://Assets/Image/gui/UI-pack-kenney/PNG/barBack.png" id="4_bo0f7"]
 [ext_resource type="AudioStream" uid="uid://ckryohbi5jhaq" path="res://Assets/Audio/Player/balloon_pop.mp3" id="4_jstre"]
+[ext_resource type="Texture2D" uid="uid://c7i7dso1sq68c" path="res://Assets/Image/gui/UI-pack-kenney/PNG/barYellow_horizontalMid.png" id="5_gb4y8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2150r"]
 atlas = ExtResource("2_0cqyj")
@@ -388,6 +390,7 @@ animations = [{
 [node name="HUD" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_2wiig")
+metadata/_edit_vertical_guides_ = [16.0]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -398,25 +401,44 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 
-[node name="redBalloon" type="AnimatedSprite2D" parent="Control"]
+[node name="Balloons" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="redBalloon" type="AnimatedSprite2D" parent="Control/Balloons"]
+position = Vector2(15, 15)
 sprite_frames = SubResource("SpriteFrames_p0efk")
 animation = &"popping"
 
-[node name="greenBalloon" type="AnimatedSprite2D" parent="Control"]
+[node name="greenBalloon" type="AnimatedSprite2D" parent="Control/Balloons"]
 sprite_frames = SubResource("SpriteFrames_qlyi6")
 animation = &"popping"
 
-[node name="blueBalloon" type="AnimatedSprite2D" parent="Control"]
+[node name="blueBalloon" type="AnimatedSprite2D" parent="Control/Balloons"]
 sprite_frames = SubResource("SpriteFrames_j7rfs")
 animation = &"popping"
 
-[node name="yellowBalloon" type="AnimatedSprite2D" parent="Control"]
+[node name="yellowBalloon" type="AnimatedSprite2D" parent="Control/Balloons"]
 sprite_frames = SubResource("SpriteFrames_s78xx")
 animation = &"popping"
 
-[node name="pinkBalloon" type="AnimatedSprite2D" parent="Control"]
+[node name="pinkBalloon" type="AnimatedSprite2D" parent="Control/Balloons"]
 sprite_frames = SubResource("SpriteFrames_ucmix")
 animation = &"popping"
+
+[node name="joyBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 29.0
+offset_right = 100.0
+offset_bottom = 33.0
+value = 100.0
+nine_patch_stretch = true
+stretch_margin_left = 6
+stretch_margin_right = 6
+texture_under = ExtResource("4_bo0f7")
+texture_progress = ExtResource("5_gb4y8")
 
 [node name="pop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_jstre")

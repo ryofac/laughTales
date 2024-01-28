@@ -3,6 +3,7 @@ extends CanvasLayer
 const PARTICLES_BALLOON = preload("res://Scenes/GUI/particles_balloon.tscn");
 
 @onready var pop = $pop as AudioStreamPlayer2D;
+@onready var joy_bar = $Control/joyBar as TextureProgressBar;
 
 var origin: Vector2 = Vector2(15, 15);
 var balloonsArr: Array;
@@ -18,16 +19,22 @@ var colors: Array[Color] = [
 	
 var counter: int = 4;
 
+var currentJoy: = 100;
+
 func _ready():
 	$Control.visible = true
 	
-	balloonsArr = get_node("Control").get_children()
+	balloonsArr = get_node("Control/Balloons").get_children()
 	for i in range(balloonsArr.size()):
 		balloonsArr[i].position = origin + Vector2( (spriteSize + padding) * i, 0);
 		balloonsArr[i].play("filling");
 	
 	HealthManager.life_increased.connect(_on_increased_life)
 	HealthManager.life_decreased.connect(_on_decreased_life)
+	HealthManager.joy_changed.connect(_on_changed_joy);
+
+func _process(delta):
+	joy_bar.value = currentJoy
 
 func _on_increased_life():
 	if !poppedBalloons.is_empty():
@@ -66,3 +73,6 @@ func spawnParticles(lastBall):
 	particles.position = lastBall.position;
 	particles.set_modulate(colors[counter]);
 	particles.emitting = true
+
+func _on_changed_joy(value: int):
+	currentJoy = value;
