@@ -64,6 +64,8 @@ func _process(delta):
 		death_animation(delta);
 	
 func manageSprite():
+	if !weakref(player): return
+	if !player: return
 	$Crosshair.visible = player.target == self;
 	
 	life_bar.value = remainingLife;
@@ -96,8 +98,9 @@ func checkPlayerInAttackRange():
 		player_on_attack_area.emit();
 
 func _input(event):
-	if event.is_action_pressed("tome"):
-		take_damage();
+	#if event.is_action_pressed("tome"):
+		#take_damage();
+	pass
 
 func spawnItem(pos: Vector2):
 	var randN = randi_range(1, 5);

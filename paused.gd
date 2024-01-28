@@ -8,6 +8,7 @@ func _ready():
 func enter():
 	super.enter();
 	gameController.hudNode.visible = false;
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
 	createMenu();
 	get_tree().paused = true;
 	

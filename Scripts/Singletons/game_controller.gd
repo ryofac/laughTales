@@ -12,6 +12,9 @@ var in_game = false;
 @export var actualMenuScene: PackedScene = preload("res://Scenes/GUI/pause_menu.tscn")
 @export var gameOverScene: PackedScene = preload("res://Scenes/GUI/game_over.tscn");
 @export var winScene: PackedScene = preload("res://Scenes/GUI/game_win.tscn");
+
+var firstTimePlaying = true;
+
 var levels: Array[PackedScene] = [
 	preload("res://Scenes/level.tscn")
 ]

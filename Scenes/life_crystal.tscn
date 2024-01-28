@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfq44axut7gq5"]
+[gd_scene load_steps=4 format=3 uid="uid://dv8g2qw1wjnbp"]
 
 [ext_resource type="Texture2D" uid="uid://dfgqhm37q6cbc" path="res://Assets/Image/other/cristal_vida.png" id="1_5vcnx"]
 [ext_resource type="Script" path="res://Scripts/Itens/life_crystal.gd" id="1_q6ko0"]

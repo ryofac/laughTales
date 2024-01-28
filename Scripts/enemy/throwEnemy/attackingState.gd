@@ -63,7 +63,7 @@ func throw_ball():
 	_b.set_collision_mask_value(1, true)
 	_b.set_collision_mask_value(4, false)
 
-	_b.modulate = Color.WHITE
+	_b.modulate = Color.YELLOW;
 	enemy.get_parent().add_child(_b);
 	_b.global_position = enemy.global_position
 	_b.dir = throwDirection;
