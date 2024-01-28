@@ -119,6 +119,7 @@ navAgent = NodePath("Navigation/NavigationAgent2D")
 speed = 30.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+modulate = Color(0.894118, 0, 0, 1)
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_v6ccg")
 animation = &"run"

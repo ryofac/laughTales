@@ -48,7 +48,8 @@ func animateSprite():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
-		Transitioned.emit(self, "bonk_attack");
+		if player.remainingJoy > 0:
+			Transitioned.emit(self, "bonk_attack");
 	elif event.is_action_pressed("throw_attack"):
 		if player.target:
 			Transitioned.emit(self, "throwing");

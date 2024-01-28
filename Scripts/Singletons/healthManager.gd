@@ -2,6 +2,7 @@ extends Node
 
 signal life_decreased;
 signal life_increased;
+signal joy_changed;
 
 var current_amount_life;
 
@@ -19,13 +20,17 @@ func set_initial_life(value: int):
 
 func increase_life(amount: int):
 	if current_amount_life < 5:
-		print_rich("[color=green]GANHOU")
+		print_rich("[color=green]GANHOU VIDA")
 		life_increased.emit();
 		current_amount_life += amount;
 
 func decrease_life(amount: int):
-	print("decreaseando vida")
 	if current_amount_life > 0:
-		print_rich("[color=red]PERDEU PLAYBOY")
+		print_rich("[color=red]PERDEU VIDA")
 		life_decreased.emit();
 		current_amount_life -= amount;
+		
+func update_joy(current_value: int):
+	print_rich("[color=cyan] ALEGRIA MUDOU")
+	if current_value >= 0 and current_value <= 100:
+		joy_changed.emit(current_value);

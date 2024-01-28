@@ -43,6 +43,8 @@ func bonk():
 	var position = player.global_position + Vector2(0 , randf_range(-4, -7))
 	DialogManager.spawnFloatingText("BONK", Color.DARK_RED, position)
 	player.spawnBonkArea() 
+	player.remainingJoy -= player.joySpent;
+	HealthManager.update_joy(player.remainingJoy);
 
 func resetSpritePosition():
 	sprite.rotation_degrees = move_toward(sprite.rotation_degrees, 0.0, 0.1)

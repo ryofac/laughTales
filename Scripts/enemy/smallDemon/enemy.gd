@@ -16,6 +16,10 @@ signal died();
 @onready var audio_death = $Audio/Death as AudioStreamPlayer2D;
 @onready var audio_damage = $Audio/TakingDamage as AudioStreamPlayer2D;
 
+#Itens
+var life_crystal = preload("res://Scenes/life_crystal.tscn");
+var joy_crystal = preload("res://Scenes/joy_crystal.tscn");
+
 var playerAttacked: Player;
 
 var spawnPosition: Vector2
@@ -83,6 +87,7 @@ func death_animation(delta: float):
 	if deathTimer > 0:
 		sprite.position.x = sin(deg_to_rad( counter * 75));
 	else:
+		spawnItem(global_position);
 		queue_free();
 		
 func checkPlayerInAttackRange():
@@ -93,3 +98,22 @@ func checkPlayerInAttackRange():
 func _input(event):
 	if event.is_action_pressed("tome"):
 		take_damage();
+
+func spawnItem(pos: Vector2):
+	var randN = randi_range(1, 5);
+	
+	if randN > 2:
+		return;
+	
+	var _item;
+	randN = randi_range(1, 5);
+	
+	print_rich("[color=pink] " + str(randN))
+	
+	if randN > 3:
+		_item = life_crystal.instantiate() as Node2D;
+	else:
+		_item = joy_crystal.instantiate() as Node2D;
+	
+	get_parent().add_child(_item);
+	_item.global_position = global_position;
