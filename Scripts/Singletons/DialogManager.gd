@@ -7,6 +7,7 @@ var currentLineIndex = 0;
 var isDialogueActive = false
 var canAdvanceLine = false
 var level: Node = null;
+signal finished_text_showing();
 
 var textBox
 var textBoxPosition: Vector2
@@ -23,7 +24,7 @@ func startDialogue(position: Vector2, lines: Array[String]):
 func showTextBox():
 	textBox = textBoxScene.instantiate() as TextBox
 	textBox.finished_typing.connect(_on_finished_typing_text_box)
-	level.add_child(textBox)
+	get_tree().root.add_child(textBox)
 	textBox.global_position = textBoxPosition
 	textBox.showText(dialogue_lines[currentLineIndex])
 	canAdvanceLine = false
@@ -33,13 +34,14 @@ func _on_finished_typing_text_box():
 	canAdvanceLine = true;
 
 func _unhandled_input(event):
-	if event.is_action_pressed("ui_home") && canAdvanceLine && isDialogueActive:
+	if event.is_action_pressed("throw_attack") && canAdvanceLine && isDialogueActive:
 		textBox.queue_free();
 		currentLineIndex += 1
 		if currentLineIndex >= dialogue_lines.size():
 			# aí fudeu, tem que parar
 			isDialogueActive = false
 			currentLineIndex = 0
+			finished_text_showing.emit();
 			return 
 		showTextBox();
 		

@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddx6jw76fk7tf"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/game_win.gd" id="1_7cgcc"]
+[ext_resource type="FontFile" uid="uid://djnjk7u7e6505" path="res://Assets/Fonts/Kenney Mini.ttf" id="2_p476y"]
+[ext_resource type="AudioStream" uid="uid://c13y8hwmet058" path="res://Assets/Audio/Player/winSound.mp3" id="3_2twfh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fx3hr"]
+resource_local_to_scene = true
+font = ExtResource("2_p476y")
+font_size = 32
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x8yhr"]
+resource_local_to_scene = true
+font = ExtResource("2_p476y")
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="GameWin" type="CanvasLayer"]
+script = ExtResource("1_7cgcc")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.233925, 0.233926, 0.233925, 0.254902)
+
+[node name="Title" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You win!"
+label_settings = SubResource("LabelSettings_fx3hr")
+horizontal_alignment = 1
+
+[node name="Warn" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = 57.0
+offset_right = -2.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 0
+text = "Your joy defeated evil in laughtwon!
+Press SHOOT to play again:)"
+label_settings = SubResource("LabelSettings_x8yhr")
+horizontal_alignment = 1
+
+[node name="Win" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2twfh")

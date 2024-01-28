@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cl67ksls0vmah"]
+[gd_scene load_steps=7 format=3 uid="uid://cl67ksls0vmah"]
 
 [ext_resource type="Script" path="res://Scripts/Singletons/game_controller.gd" id="1_4a3p4"]
 [ext_resource type="Script" path="res://Scripts/state/StateMachine.gd" id="2_ki1qg"]
 [ext_resource type="Script" path="res://Scripts/gameController/normal_game.gd" id="3_mlfpu"]
 [ext_resource type="Script" path="res://paused.gd" id="4_f66r4"]
 [ext_resource type="Script" path="res://Scripts/gameController/game_over.gd" id="5_w4li7"]
+[ext_resource type="Script" path="res://Scripts/gameController/game_win.gd" id="6_3kue8"]
 
-[node name="GameController" type="Node"]
+[node name="GameController" type="Node" groups=["gameController"]]
 script = ExtResource("1_4a3p4")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
@@ -25,6 +26,8 @@ gameController = NodePath("../..")
 script = ExtResource("5_w4li7")
 gameController = NodePath("../..")
 
-[node name="changing_level" type="Node" parent="StateMachine"]
+[node name="game_win" type="Node" parent="StateMachine" node_paths=PackedStringArray("gameController")]
+script = ExtResource("6_3kue8")
+gameController = NodePath("../..")
 
 [node name="main_menu" type="Node" parent="StateMachine"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://caye0v83rm6ni"]
+[gd_scene load_steps=30 format=3 uid="uid://caye0v83rm6ni"]
 
 [ext_resource type="Script" path="res://Scripts/player/player.gd" id="1_61qau"]
 [ext_resource type="Texture2D" uid="uid://c4vgsr8uv7vdc" path="res://Assets/Image/player/normal.png" id="1_hr50d"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/player/throwingState.gd" id="9_fvma3"]
 [ext_resource type="Script" path="res://Scripts/player/playerAttacked.gd" id="10_k6c74"]
 [ext_resource type="Script" path="res://Scripts/player/dyingState.gd" id="11_g28m5"]
+[ext_resource type="Script" path="res://Scripts/player/stopped.gd" id="12_3uulf"]
 [ext_resource type="AudioStream" uid="uid://ddm7tt0kuaknv" path="res://Assets/Audio/Player/ball_throwing.mp3" id="12_cimmh"]
 [ext_resource type="AudioStream" uid="uid://ed7d8suij0s3" path="res://Assets/Audio/Enemy/enemy_attack.mp3" id="13_4vkrr"]
 
@@ -160,7 +161,7 @@ shape = SubResource("CircleShape2D_ttsna")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 process_mode = 1
 script = ExtResource("3_px7sx")
-initialState = NodePath("walking")
+initialState = NodePath("stopped")
 
 [node name="walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("7_i4i31")
@@ -180,6 +181,10 @@ player = NodePath("../..")
 
 [node name="dying" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("11_g28m5")
+player = NodePath("../..")
+
+[node name="stopped" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("12_3uulf")
 player = NodePath("../..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
