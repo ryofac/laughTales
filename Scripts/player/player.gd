@@ -3,6 +3,7 @@ class_name Player
 	
 #var enemy: Enemy
 signal died();
+signal dialog_finished();
 
 @onready var audio_bonk = $Audio/Bonk as AudioStreamPlayer2D;
 @onready var audio_throwing = $Audio/Throwing as AudioStreamPlayer2D;

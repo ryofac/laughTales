@@ -3,12 +3,15 @@ class_name GameController
 
 signal changingLevel;
 
+signal finishedGame;
+
 @onready var stateMachine: StateMachine = $StateMachine;
 var in_game = false;
 @export var can_change_fullscreen = true;
 @export var debug = false;
 @export var actualMenuScene: PackedScene = preload("res://Scenes/GUI/pause_menu.tscn")
 @export var gameOverScene: PackedScene = preload("res://Scenes/GUI/game_over.tscn");
+@export var winScene: PackedScene = preload("res://Scenes/GUI/game_win.tscn");
 var levels: Array[PackedScene] = [
 	preload("res://Scenes/level.tscn")
 ]

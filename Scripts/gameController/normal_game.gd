@@ -1,4 +1,7 @@
 extends gameState
+
+func _ready():
+	gameController.finishedGame.connect(_on_level_ended)
 	
 func enter():
 	super.enter();
@@ -30,3 +33,7 @@ func physics_update(delta):
 func _on_player_died():
 	print("Morri.......... ")
 	Transitioned.emit(self, "game_over");
+
+func _on_level_ended():
+	print("Passou de nível")
+	Transitioned.emit(self, "game_win")

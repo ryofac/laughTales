@@ -44,5 +44,5 @@ func physics_update(delta):
 		player.sprite.flip_h = knockback_dir.x > 0
 	player.direction = Vector2.ZERO;
 	player.global_position += 1 * knockback_dir;
-	player.velocity = player.speed * player.direction
+	player.velocity = player.speed * player.direction;
 

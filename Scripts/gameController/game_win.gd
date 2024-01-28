@@ -1,25 +1,23 @@
 extends gameState
 
-var overNode;
+var winNode;
 var timeToContinue = 2;
 
 func enter():
+	timeToContinue = 2;
 	get_tree().paused = true;
-	instantiateGameOver();
+	instantiateWinScene();
 	
 func update(delta):
 	timeToContinue -= delta;
 	if Input.is_action_just_pressed("throw_attack") and timeToContinue <= 0:
 		gameController.hudNode.queue_free();
 		gameController.hudNode = null;
-		overNode.queue_free();
+		winNode.queue_free();
 		gameController.restartLevel();
 		Transitioned.emit(self, "normal_game")
 	
 
-func instantiateGameOver():
-	overNode = gameController.gameOverScene.instantiate();
-	gameController.add_child(overNode)
-	
-
-
+func instantiateWinScene():
+	winNode = gameController.winScene.instantiate();
+	gameController.add_child(winNode)

@@ -1,6 +1,8 @@
 extends Entity
 class_name Enemy
 signal player_on_attack_area();
+signal died();
+
 @onready var sprite = $AnimatedSprite2D as AnimatedSprite2D;
 @onready var life_bar = $TextureProgressBar as TextureProgressBar;
 @export var navAgent : NavigationAgent2D;
@@ -9,6 +11,7 @@ signal player_on_attack_area();
 #Preciso da referencia do player, mas ela aparece só nos estados
 @onready var player = get_tree().get_first_node_in_group("player") as Player
 @onready var attackRange = get_node("AttackRange") as Area2D;
+@onready var levelController = get_tree().get_first_node_in_group("levelController")
 
 @onready var audio_death = $Audio/Death as AudioStreamPlayer2D;
 @onready var audio_damage = $Audio/TakingDamage as AudioStreamPlayer2D;
@@ -27,6 +30,7 @@ var counter = 0;
 @export var crosshSpeed = 3
 @export var animationRange = 3;
 @export var COOLDOWN_ATTACK_TIME = 0.5;
+var oneShot = true;
 
 
 func _ready():
@@ -35,6 +39,7 @@ func _ready():
 	life_bar.max_value = maxLife;
 	navAgent.path_desired_distance = 4;
 	navAgent.target_desired_distance = 4;
+	died.connect(levelController._on_enemy_died)
 
 func _physics_process(delta):
 	move_and_slide();
@@ -49,6 +54,9 @@ func _process(delta):
 	life_bar.value = lerp(life_bar.value, remainingLife, 0.168);
 	
 	if is_dying:
+		if oneShot:
+			died.emit();
+			oneShot = false;
 		death_animation(delta);
 	
 func manageSprite():

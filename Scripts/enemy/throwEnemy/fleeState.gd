@@ -1,7 +1,7 @@
 extends EnemyState
 class_name enemyFollowingS
 # O tempo que dura a perseguição
-var fleeTimer: float;
+
 
 # Esse objeto directions consegue guardar os valores respectivos par os pesos em
 # cada direção possíveis, indexadas em uma lista
@@ -21,6 +21,8 @@ var contextMap = [];
 @export var maxSteerForce = 0.1;
 @export var flee : bool; 
 @export var roundMovementAmount: float = 0;
+@export var timeForFlee: float
+var fleeTimer: float;
 var desirableDir: Vector2;
 
 # O que deve ser feito:
@@ -52,7 +54,7 @@ func enter():
 		# Primeiro pega a base com o RIGHT e depois roda em relação ao ângulo
 		directionsArray[i] = Vector2.RIGHT.rotated(angle)
 	
-	fleeTimer = 3;
+	fleeTimer = timeForFlee;
 	alertTimer = 1;
 
 func update(delta):
@@ -64,8 +66,8 @@ func update(delta):
 		if fleeTimer > 0:
 			fleeTimer -= delta
 		else:
-			fleeTimer = 3
-			Transitioned.emit(self, "idle")
+			fleeTimer = timeForFlee
+			Transitioned.emit(self, "attacking")
 			
 	alertTimer -= delta;
 	

@@ -110,7 +110,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8bwll"]
-radius = 42.0119
+radius = 32.0
 
 [node name="Enemy" node_paths=PackedStringArray("navAgent") instance=ExtResource("1_xv084")]
 motion_mode = 1
@@ -149,6 +149,7 @@ enemy = NodePath("../..")
 [node name="flee" type="Node" parent="StateMachine" index="4" node_paths=PackedStringArray("enemy")]
 script = ExtResource("10_22utk")
 flee = true
+timeForFlee = 1.5
 enemy = NodePath("../..")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." index="4"]
