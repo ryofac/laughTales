@@ -17,6 +17,7 @@ func enter():
 	attackTime = duraction;
 	throwDirection = player.global_position.direction_to(player.target.global_position);
 	throw_ball();
+
 	
 func update(delta):
 	spritePlayer.rotation_degrees = lerp(spritePlayer.rotation_degrees, 0.0, 0.1);
@@ -34,6 +35,10 @@ func physics_update(delta):
 	pass
 
 func throw_ball():
+	player.audio_throwing.play();
+	
+	#await  player.audio_throwing.finished;
+	
 	var _b = ballScene.instantiate();
 	player.get_parent().add_child(_b);
 	_b.global_position = player.global_position

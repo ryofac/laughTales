@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="global-jam"
-run/main_scene="res://Scenes/level.tscn"
+run/main_scene="res://game_controller.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 DialogManager="*res://Scripts/Singletons/DialogManager.gd"
 HealthManager="*res://Scripts/Singletons/healthManager.gd"
 GameManager="*res://Scripts/Singletons/game_manager.gd"
+AudioManager="*res://Scripts/Singletons/AudioManager.gd"
 
 [display]
 

@@ -48,4 +48,10 @@ wait_time = 0.5
 shape = SubResource("CircleShape2D_tna78")
 debug_color = Color(0.964706, 0, 0.490196, 0.419608)
 
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Audio"]
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Audio"]
+
 [connection signal="timeout" from="Navigation/RecalcPathTimer" to="." method="_on_recalc_path_timer_timeout"]

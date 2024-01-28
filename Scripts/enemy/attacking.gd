@@ -16,6 +16,9 @@ func enter():
 		Transitioned.emit(self, "following")
 		return;
 	
+	
+	enemy.audio_attack.play();
+	
 	player.under_attack = true;
 	enemy.velocity = Vector2.ZERO;
 	enemy.sprite.rotation_degrees = 45 * enemy.direction.x;
@@ -23,6 +26,10 @@ func enter():
 	player.attackingEnemy = enemy;
 	player.take_damage(enemy.PLAYER_DAMAGE)
 	
+	# Pausa o fluxo do programa até que o sinal ativar 
+	await enemy.audio_attack.finished;
+	
+	# Atualiza a HUD do player
 	HealthManager.decrease_life(enemy.PLAYER_DAMAGE);
 	
 	canAttack = false;

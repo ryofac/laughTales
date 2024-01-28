@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cmsa1n8mgd8n1"]
+[gd_scene load_steps=27 format=3 uid="uid://cmsa1n8mgd8n1"]
 
 [ext_resource type="PackedScene" uid="uid://dm6itx56ensml" path="res://Scenes/enemy.tscn" id="1_cvju7"]
 [ext_resource type="Texture2D" uid="uid://c153x06h30dk8" path="res://Assets/Image/enemy/smallDemon/hit.png" id="2_bci6p"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://Scripts/enemy/enemyAttacked.gd" id="10_i18d7"]
 [ext_resource type="Texture2D" uid="uid://chx36yghti2g" path="res://Assets/Image/gui/UI-pack-kenney/PNG/edge.png" id="11_7woi5"]
 [ext_resource type="Texture2D" uid="uid://rurricfbmdj5" path="res://Assets/Image/gui/UI-pack-kenney/PNG/barGreen_horizontalMid.png" id="11_glm15"]
+[ext_resource type="AudioStream" uid="uid://ed7d8suij0s3" path="res://Assets/Audio/Enemy/enemy_attack.mp3" id="14_wa6yv"]
+[ext_resource type="AudioStream" uid="uid://d15k1bpmmh4jw" path="res://Assets/Audio/Enemy/enemiesDying.mp3" id="15_8sfim"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yuj58"]
 atlas = ExtResource("2_bci6p")
@@ -168,6 +170,13 @@ autostart = true
 
 [node name="CoolDownAttackTimer" type="Timer" parent="." index="7"]
 wait_time = 0.5
+
+[node name="Attack" parent="Audio" index="0"]
+stream = ExtResource("14_wa6yv")
+volume_db = -10.0
+
+[node name="Death" parent="Audio" index="1"]
+stream = ExtResource("15_8sfim")
 
 [connection signal="timeout" from="Navigation/RecalcPathTimer" to="StateMachine/following" method="_on_recalc_path_timer_timeout"]
 [connection signal="body_entered" from="AttackRange" to="StateMachine/following" method="_on_attack_range_body_entered"]

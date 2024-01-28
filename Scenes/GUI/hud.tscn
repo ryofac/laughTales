@@ -1,8 +1,9 @@
-[gd_scene load_steps=54 format=3 uid="uid://cf4kmbftnaom4"]
+[gd_scene load_steps=55 format=3 uid="uid://cf4kmbftnaom4"]
 
 [ext_resource type="Script" path="res://Scenes/GUI/hud.gd" id="1_2wiig"]
 [ext_resource type="Texture2D" uid="uid://bfphpj61hvy3q" path="res://Assets/Image/other/balloon_filling.png" id="2_0cqyj"]
 [ext_resource type="Texture2D" uid="uid://48p8muejn7hm" path="res://Assets/Image/other/balloon_popping.png" id="2_dbmxb"]
+[ext_resource type="AudioStream" uid="uid://ckryohbi5jhaq" path="res://Assets/Audio/Player/balloon_pop.mp3" id="4_jstre"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2150r"]
 atlas = ExtResource("2_0cqyj")
@@ -416,3 +417,7 @@ animation = &"popping"
 [node name="pinkBalloon" type="AnimatedSprite2D" parent="Control"]
 sprite_frames = SubResource("SpriteFrames_ucmix")
 animation = &"filling"
+
+[node name="pop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jstre")
+volume_db = -5.0
