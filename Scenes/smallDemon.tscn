@@ -113,7 +113,7 @@ animations = [{
 motion_mode = 1
 wall_min_slide_angle = 0.0
 navAgent = NodePath("Navigation/NavigationAgent2D")
-speed = 20.0
+speed = 50.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 texture_filter = 1
@@ -162,9 +162,6 @@ nine_patch_stretch = true
 texture_under = ExtResource("10_ag3uy")
 texture_over = ExtResource("11_7woi5")
 texture_progress = ExtResource("11_glm15")
-
-[node name="NavigationAgent2D" parent="Navigation" index="0"]
-debug_enabled = true
 
 [node name="RecalcPathTimer" parent="Navigation" index="1"]
 autostart = true

@@ -64,7 +64,7 @@ offset_bottom = 97.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 0
-text = "Your joy defeated evil in laughtwon!
+text = "Your joy defeated evil in Laughthown!
 Press SHOOT to play again:)"
 label_settings = SubResource("LabelSettings_x8yhr")
 horizontal_alignment = 1

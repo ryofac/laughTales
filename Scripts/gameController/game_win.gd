@@ -6,6 +6,7 @@ var timeToContinue = 2;
 func enter():
 	timeToContinue = 2;
 	get_tree().paused = true;
+	gameController.hudNode.visible = false;
 	instantiateWinScene();
 	
 func update(delta):

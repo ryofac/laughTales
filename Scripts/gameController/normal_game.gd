@@ -5,6 +5,7 @@ func _ready():
 	
 func enter():
 	super.enter();
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED;
 	get_tree().paused = false;
 	if !gameController.currentLevel:
 		gameController.changeLevel(0);

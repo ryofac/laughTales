@@ -132,7 +132,7 @@ animations = [{
 size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ttsna"]
-radius = 64.0
+radius = 68.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 process_mode = 1
@@ -188,7 +188,12 @@ script = ExtResource("12_3uulf")
 player = NodePath("../..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.5, 1.5)
+limit_left = -115
+limit_top = 0
+limit_right = 640
+limit_bottom = 400
+limit_smoothed = true
 
 [node name="Audio" type="Node2D" parent="."]
 

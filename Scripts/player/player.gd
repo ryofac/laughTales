@@ -72,11 +72,11 @@ func talk():
 	var text: Array[String] = ["Abobra com mel"]
 	DialogManager.startDialogue(global_position, text)
 
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_home"):
-		#talk()
-		if remainingLife < maxLife:
-			HealthManager.increase_life(1);
+#func _unhandled_input(event):
+	#if event.is_action_pressed("ui_home"):
+		##talk()
+		#if remainingLife < maxLife:
+			#HealthManager.increase_life(1);
 		
 		
 func spawnBonkArea():

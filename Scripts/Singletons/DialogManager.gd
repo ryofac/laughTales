@@ -2,7 +2,7 @@ extends Node
 
 @onready var floatingTextScene = preload("res://Scenes/floating_text.tscn")
 @onready var textBoxScene = preload("res://Scenes/text_box.tscn")
-var dialogue_lines : Array[String] = []
+var dialogue_lines  := []
 var currentLineIndex = 0;
 var isDialogueActive = false
 var canAdvanceLine = false
@@ -12,7 +12,7 @@ signal finished_text_showing();
 var textBox
 var textBoxPosition: Vector2
 
-func startDialogue(position: Vector2, lines: Array[String]):
+func startDialogue(position: Vector2, lines: Array):
 	if isDialogueActive:
 		return
 		

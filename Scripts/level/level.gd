@@ -6,9 +6,16 @@ var enemyScenes = [preload("res://Scenes/throwerEnemy.tscn"), preload("res://Sce
 @onready var playerScene = preload("res://Scenes/player.tscn")
 @onready var enemyScene = enemyScenes[1];
 @onready var enemySpawnPoints = get_node("enemySpawn").get_children() as Array[Marker2D]
+
+@onready var gameController = get_tree().get_first_node_in_group("gameController") as GameController
 var player: Player;
 
 @export var objetiveKillCount: int;
+
+@export var stateMachine: StateMachine;
+@export var tutorialState: LevelState;
+@export var waveState: LevelState;
+
 var killCount = 0;
 
 const START_POSITION := Vector2(300, 200)
@@ -19,11 +26,13 @@ func _ready():
 	print("Sendo spawnado!")
 	randomize()
 	instantiatePlayer(START_POSITION)
-	
+		
 func _process(delta):
-	if Input.is_action_just_pressed("spawnEnemies"):
-		for i in range(1):
-			instantiateEnemy(START_POSITION + Vector2(10 + 16*i, 0))
+	#if Input.is_action_just_pressed("spawnEnemies"):
+		#for i in range(1):
+			#instantiateEnemy(START_POSITION + Vector2(10 + 16*i, 0))
+	
+	pass
 	
 func instantiatePlayer(pos: Vector2):
 	player = (playerScene.instantiate() as Player)
