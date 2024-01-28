@@ -20,7 +20,6 @@ var remainingLife: float = 100;
 
 func take_damage(damage: float = 10.0):
 	remainingLife -= damage;
-	
 	being_attacked.emit()
 	if remainingLife <= 0:
 		##dropa item

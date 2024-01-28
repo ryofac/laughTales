@@ -1,11 +1,13 @@
 extends Node2D
 
+var enemyScenes = [preload("res://Scenes/throwerEnemy.tscn"), preload("res://Scenes/smallDemon.tscn")]
 @onready var playerScene = preload("res://Scenes/player.tscn")
-@onready var enemyScene = preload("res://Scenes/smallDemon.tscn")
+@onready var enemyScene = enemyScenes[1];
 
 var player: Player;
 
 const START_POSITION := Vector2(300, 200)
+signal playerCreated();
 
 func _ready():
 	print("Sendo spawnado!")
@@ -21,9 +23,10 @@ func instantiatePlayer(pos: Vector2):
 	player = (playerScene.instantiate() as Player)
 	player.global_position = pos;
 	add_child(player)
+	playerCreated.emit();
 
 func instantiateEnemy(pos):
-	var enemyIns = (enemyScene.instantiate() as Enemy)
+	var enemyIns = (enemyScenes.pick_random().instantiate() as Enemy)
 	enemyIns.global_position = pos
 	add_child(enemyIns)
 	

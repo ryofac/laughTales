@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhrqx6crfs6t0"]
+
+[ext_resource type="Script" path="res://Scripts/gui/pause_menu.gd" id="1_tqf8e"]
+[ext_resource type="FontFile" uid="uid://djnjk7u7e6505" path="res://Assets/Fonts/Kenney Mini.ttf" id="1_wyfjj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fx3hr"]
+font = ExtResource("1_wyfjj")
+font_size = 32
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_tqf8e")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.233925, 0.233926, 0.233925, 0.254902)
+
+[node name="Title" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -124.0
+offset_bottom = -84.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_fx3hr")
+horizontal_alignment = 1

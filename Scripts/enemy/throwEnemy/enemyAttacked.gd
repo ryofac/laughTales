@@ -2,14 +2,16 @@ extends EnemyState
 
 class_name enemyAttackedS
 
+@export var damageAudio: AudioStream;
 var timeToStop = 0.5;
 var timer;
-
 var knockback_dir;
 
 func enter():
 	knockback_dir = (enemy.global_position - player.global_position).normalized();
 	timer = timeToStop;
+	enemy.audio_damage.play();
+	
 	
 func update(delta):
 	if enemy.is_dying:
@@ -19,11 +21,10 @@ func update(delta):
 	knockback_dir = (enemy.global_position - player.global_position).normalized();
 	if enemy.sprite.animation != "hit": 
 		enemy.sprite.play("hit")
-	
 	if timer > 0:
 		timer -= delta
 	else:
-		Transitioned.emit(self, "following");
+		Transitioned.emit(self, "attacking");
 
 
 func physics_update(delta):

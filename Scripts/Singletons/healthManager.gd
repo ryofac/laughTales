@@ -24,6 +24,7 @@ func increase_life(amount: int):
 		current_amount_life += amount;
 
 func decrease_life(amount: int):
+	print("decreaseando vida")
 	if current_amount_life > 0:
 		print_rich("[color=red]PERDEU PLAYBOY")
 		life_decreased.emit();

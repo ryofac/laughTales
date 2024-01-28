@@ -9,6 +9,7 @@ var currentState: State;
 @onready var gameController = get_parent();
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS;
 	# Adicionando logo o estado inicial que é um @export
 	if initialState: 
 		initialState.enter();
@@ -40,6 +41,8 @@ func _on_transitioned_state(state: State, newStateName: String):
 		return
 		
 	var newState = states.get(newStateName.to_lower())
+	
+	
 	if !newState or newState == currentState:
 		return
 		

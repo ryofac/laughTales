@@ -1,7 +1,7 @@
 extends EnemyState
 class_name enemyFollowingS
 # O tempo que dura a perseguição
-var followingTimer: float;
+var fleeTimer: float;
 
 # Esse objeto directions consegue guardar os valores respectivos par os pesos em
 # cada direção possíveis, indexadas em uma lista
@@ -36,7 +36,7 @@ var alertTimer: float;
 
 func _ready():
 	enemy.being_attacked.connect(_on_enemy_being_attacked)
-	enemy.player_on_attack_area.connect(_on_enemy_player_on_attack_area)
+	#enemy.player_on_attack_area.connect(_on_enemy_player_on_attack_area)
 
 func enter():
 	enemy.canMove = true
@@ -52,7 +52,7 @@ func enter():
 		# Primeiro pega a base com o RIGHT e depois roda em relação ao ângulo
 		directionsArray[i] = Vector2.RIGHT.rotated(angle)
 	
-	followingTimer = 30
+	fleeTimer = 3;
 	alertTimer = 1;
 
 func update(delta):
@@ -61,10 +61,10 @@ func update(delta):
 		return;
 		
 	if alertTimer <= 0:
-		if followingTimer > 0:
-			followingTimer -= delta
+		if fleeTimer > 0:
+			fleeTimer -= delta
 		else:
-			followingTimer = 10
+			fleeTimer = 3
 			Transitioned.emit(self, "idle")
 			
 	alertTimer -= delta;
@@ -118,16 +118,16 @@ func recalcPath():
 		navAgent.target_position = player.global_position
 	else:
 		navAgent.target_position = enemy.spawnPosition
-		
+
 	
 func _on_enemy_being_attacked():
 	if !enemy.is_dying: Transitioned.emit(self, "attacked");
-
-
+	
 func _on_recalc_path_timer_timeout():
 	recalcPath()
 
-func _on_enemy_player_on_attack_area():
-	if !enemy.is_dying and !player.under_attack: 
-		Transitioned.emit(self, "attacking");
+#func _on_enemy_player_on_attack_area():
+	#if !enemy.is_dying and !player.under_attack: 
+		#Transitioned.emit(self, "attacking");
+
 

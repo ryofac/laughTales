@@ -19,14 +19,20 @@ func enter():
 	count += 1
 	
 func update(delta):
+	var _wref = weakref(player.attackingEnemy);
+	if !_wref:
+		return;
 	var attackingEnemy = player.attackingEnemy;
-	if attackingEnemy:
+	if attackingEnemy != null:
 		knockback_dir = (player.global_position - attackingEnemy.global_position).normalized();
 	if timer > 0:
 		timer -= delta
 	else:
+		if player.is_dying:
+			Transitioned.emit(self, "dying")
 		Transitioned.emit(self, "walking");
 		player.attackingEnemy = null;
+
 	if player.sprite.animation != "hit" and !played: 
 		print("playando animação")
 		print("===================== %d" % count)
